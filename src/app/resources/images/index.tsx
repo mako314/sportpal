@@ -1,0 +1,1 @@
+export { default as SportsPalSVG} from "../images/SportsPal.svg"
