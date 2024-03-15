@@ -1,3 +1,5 @@
+import { SportsPalSVG } from "@/app/resources/images"
+
 export default function HomePageTestimonial() {
 
     return (
@@ -6,13 +8,17 @@ export default function HomePageTestimonial() {
             <div className="flex flex-col-reverse justify-start gap-8 sm:gap-20 lg:flex-row">
             <img src="https://assets.website-files.com/6357722e2a5f19121d37f84d/635b53eeec84c014ec421d16_Group%20183.png" alt="" className="inline-block max-w-xl" />
             <div className="flex flex-col items-start lg:justify-center">
-                <img src="https://assets.website-files.com/6357722e2a5f19121d37f84d/6358ca7f4a2963633083434e_PayPal%20Logo-2.svg" alt="" className="mb-4 inline-block" />
-                <p className="mb-6 max-w-md text-[#636262] md:mb-12"> Sport Pal is dedicated to benefiting everyone in the sports arena, from the athletes and coaches to the scouts. Our mission is to deliver comprehensive game analytics to players, equipping them with professional profiles that streamline the scouting process. 
+                <div className="flex items-center space-x-4"> 
+                    <SportsPalSVG className="inline-block w-24 h-24"/>
+                    <h1 className="text-3xl font-bold text-gray-800">Sport Pal</h1>
+                </div>
+                
+                <p className="mb-6 max-w-md text-[#636262] md:mb-12 mt-4"> Sport Pal is dedicated to benefiting everyone in the sports arena, from the athletes and coaches to the scouts. Our mission is to deliver comprehensive game analytics to players, equipping them with professional profiles that streamline the scouting process. 
                 <br />
                 <br />This approach not only enhances performance insights for athletes but also simplifies talent identification for scouts, ensuring a smoother connection between emerging talent and professional opportunities.
                 </p>
-                <p className="font-bold">John Robert</p>
-                <p className="text-sm text-[#647084]">Senior Webflow Developer</p>
+                <p className="font-bold"> Gray Angelo </p>
+                <p className="text-sm text-[#647084]">CEO</p>
             </div>
             </div>
         </div>
