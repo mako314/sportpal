@@ -1,3 +1,5 @@
+import HomePageTestimonial from "./testimonialWithHero"
+
 export default function HomePage() {
 
   return (
@@ -28,6 +30,9 @@ export default function HomePage() {
         <div className="absolute bottom-0 left-4 right-0 top-4 -z-10 rounded-2xl bg-black"></div>
       </div>
     </div>
+
+    <HomePageTestimonial/>
+    
   </div>
 </div>
   )
