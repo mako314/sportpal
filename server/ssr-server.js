@@ -11,18 +11,24 @@ app.prepare()
 .then(() => {
   const server = express()
 
-  // Custom route for the homepage
-  server.get('/', (req, res) => {
+    // Custom route for the homepage
+    server.get('/homepage', (req, res) => {
     res.send('Hello World!');
-  });
+    });
+
+    // API route for data handling
+    server.get('/api/data', (req, res) => {
+    // Handle the data (fetch, post, etc.)
+    res.json({ message: 'This is the data response' });
+    });
 
   server.get('*', (req, res) => {
     return handle(req, res)
   })
 
-  server.listen(3000, (err) => {
+  server.listen(5000, (err) => {
     if (err) throw err
-    console.log('> Ready on http://localhost:3000')
+    console.log('> Ready on http://localhost:5000')
   })
 })
 .catch((ex) => {
