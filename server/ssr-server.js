@@ -2,6 +2,8 @@
 // https://blog.logrocket.com/build-server-rendered-react-app-next-express/
 const express = require('express')
 const next = require('next')
+const { Pool } = require('pg');
+
 
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
