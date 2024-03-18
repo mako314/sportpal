@@ -7,14 +7,18 @@ const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()
 
+// " When you're running a Next.js application with a custom server like Express, you're effectively replacing the default Next.js server. This means you don't need to worry about the default Next.js development server that runs on localhost:3000. Instead, you'll be using the Express server, which you can configure to run on any port you choose, like localhost:5000 in your case. "
+
 app.prepare()
 .then(() => {
   const server = express()
 
-    // Custom route for the homepage
-    server.get('/homepage', (req, res) => {
-    res.send('Hello World!');
-    });
+    // So just realize, anything in a route will be fetched with API, otherwise if we do this /homepage stuff abnd it'd have this message appear, or any other content.
+
+    // // Custom route for the homepage
+    // server.get('/homepage', (req, res) => {
+    // res.send('Hello World!');
+    // });
 
     // API route for data handling
     server.get('/api/data', (req, res) => {
