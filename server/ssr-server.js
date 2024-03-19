@@ -23,6 +23,9 @@ const pool = new Pool({
   database: process.env.DB_NAME,
   password: process.env.DB_PASSWORD,
   port: process.env.DB_PORT || 5432, // Default port for PostgreSQL
+  ssl: {
+    rejectUnauthorized: false // For production, set this to true and provide the necessary CA certificates
+  }
 });
 
 // " When you're running a Next.js application with a custom server like Express, you're effectively replacing the default Next.js server. This means you don't need to worry about the default Next.js development server that runs on localhost:3000. Instead, you'll be using the Express server, which you can configure to run on any port you choose, like localhost:5000 in your case. "
