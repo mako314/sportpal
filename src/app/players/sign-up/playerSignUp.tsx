@@ -25,21 +25,34 @@ export default function PlayerSignUpForm() {
     //   <button type="submit">Submit</button>
     // </form> 
 
-    <form name="wf-form-password" method="get">
-    <div className="relative">
-        <img alt="" src="https://assets.website-files.com/6458c625291a94a195e6cf3a/6458c625291a9455fae6cf89_EnvelopeSimple.svg" className="absolute left-[5%] top-[26%] inline-block" />
-        <input type="email" className="mb-4 block h-9 w-full rounded-md border border-solid border-black px-3 py-6 pl-14 text-sm text-[#333333]" placeholder="Email Address" />
-    </div>
-    <div className="relative mb-4">
-        <img alt="" src="https://assets.website-files.com/6458c625291a94a195e6cf3a/6458c625291a946794e6cf8a_Lock-2.svg" className="absolute left-[5%] top-[26%] inline-block" />
-        <input type="password" className="mb-4 block h-9 w-full rounded-md border border-solid border-black px-3 py-6 pl-14 text-sm text-[#333333]" placeholder="Password (min 8 characters)" />
-    </div>
-    <label className="mb-6 flex items-center justify-start pb-12 pl-5 font-medium md:mb-10 lg:mb-1">
-        <input type="checkbox" name="checkbox" className="float-left -ml-[20px] mt-1" />
-        <span className="ml-4 inline-block cursor-pointer text-sm">I agree with the <a href="#" className="font-bold text-[#0b0b1f]">Terms &amp; Conditions</a>
-        </span>
-    </label>
-    <input type="submit" value="Join Flowspark" className="inline-block w-full cursor-pointer items-center bg-black px-6 py-3 text-center font-semibold text-white" />
+    <form name="wf-form-player-signup" method="post">
+        <div className="relative">
+            <input type="text" className="mb-4 block h-9 w-full rounded-md border border-solid border-black px-3 py-6 pl-14 text-sm text-[#333333]" placeholder="First Name" />
+        </div>
+        <div className="relative">
+            <input type="text" className="mb-4 block h-9 w-full rounded-md border border-solid border-black px-3 py-6 pl-14 text-sm text-[#333333]" placeholder="Last Name" />
+        </div>
+        {/* <!-- Continue for other input fields... --> */}
+        <div className="relative">
+            <input type="text" className="mb-4 block h-9 w-full rounded-md border border-solid border-black px-3 py-6 pl-14 text-sm text-[#333333]" placeholder="Email Address" />
+        </div>
+        <div className="relative">
+            <input type="text" className="mb-4 block h-9 w-full rounded-md border border-solid border-black px-3 py-6 pl-14 text-sm text-[#333333]" placeholder="Mobile Number" />
+        </div>
+        <div className="relative">
+            <input type="text" className="mb-4 block h-9 w-full rounded-md border border-solid border-black px-3 py-6 pl-14 text-sm text-[#333333]" placeholder="Parents Mobile Number" />
+        </div>
+        {/* <!-- Assume that you continue to add fields for each column --> */}
+        <div className="relative mb-4">
+            <input type="password" className="mb-4 block h-9 w-full rounded-md border border-solid border-black px-3 py-6 pl-14 text-sm text-[#333333]" placeholder="Password (min 8 characters)" />
+        </div>
+        
+        <label className="mb-6 flex items-center justify-start pb-12 pl-5 font-medium md:mb-10 lg:mb-1">
+            <input type="checkbox" name="checkbox" className="float-left -ml-[20px] mt-1" />
+            <span className="ml-4 inline-block cursor-pointer text-sm">I agree with the <a href="#" className="font-bold text-[#0b0b1f]">Terms &amp; Conditions</a>
+            </span>
+        </label>
+        <input type="submit" value="Join Flowspark" className="inline-block w-full cursor-pointer items-center bg-black px-6 py-3 text-center font-semibold text-white" />
     </form>
     )
   }
