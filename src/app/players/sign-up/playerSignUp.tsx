@@ -21,6 +21,18 @@ export default function PlayerSignUpForm() {
 
     // Some things to consider, if linking a parents mobile and email, should we also take their name down?
 
+    // Thinking of breaking this down into 3 parts?
+
+    // Part 1 - Basic Information
+    // Name, Email, Parents Info.
+
+    // Part 2 - Academics
+    // Middle - College ? 
+
+    // Part 3 - Sports
+    // In this part, one may get away with having them write positions and such, but maybe it's better to have our own on hand? 
+
+
     return (
     // onSubmit={onSubmit}
     // <form>
@@ -93,7 +105,7 @@ export default function PlayerSignUpForm() {
             <span className="ml-4 inline-block cursor-pointer text-sm">I agree with the <a href="#" className="font-bold text-[#0b0b1f]">Terms &amp; Conditions</a>
             </span>
         </label>
-        <input type="submit" value="Join Flowspark" className="inline-block w-full cursor-pointer items-center bg-black px-6 py-3 text-center font-semibold text-white" />
+        <input type="submit" value="Join SportPal" className="inline-block w-full cursor-pointer items-center bg-black px-6 py-3 text-center font-semibold text-white" />
     </form>
     )
   }
