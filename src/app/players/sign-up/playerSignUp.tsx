@@ -26,9 +26,6 @@ export default function PlayerSignUpForm() {
     // Part 1 - Basic Information
     // Name, Email, Parents Info.
 
-    // Part 2 - Academics
-    // Middle - College ? 
-
     // Part 3 - Sports
     // In this part, one may get away with having them write positions and such, but maybe it's better to have our own on hand? 
 
