@@ -1,3 +1,11 @@
+// https://developers.google.com/maps/documentation/javascript/using-typescript
+// https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-addressform#maps_places_autocomplete_addressform-typescript
+// https://jsfiddle.net/gh/get/library/pure/googlemaps/js-samples/tree/master/dist/samples/places-autocomplete-addressform/jsfiddle
+
+export default function SchoolSignUp() {
+
+// Address Form 
+
 // This sample uses the Places Autocomplete widget to:
 // 1. Help the user select a place
 // 2. Retrieve the address components associated with that place
@@ -6,26 +14,25 @@
 // Include the libraries=places parameter when you first load the API.
 // For example: <script
 // src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
-
-let autocomplete: google.maps.places.Autocomplete;
-let address1Field: HTMLInputElement;
-let address2Field: HTMLInputElement;
-let postalField: HTMLInputElement;
+let autocomplete;
+let address1Field;
+let address2Field;
+let postalField;
 
 function initAutocomplete() {
-  address1Field = document.querySelector("#ship-address") as HTMLInputElement;
-  address2Field = document.querySelector("#address2") as HTMLInputElement;
-  postalField = document.querySelector("#postcode") as HTMLInputElement;
-
+  address1Field = document.querySelector("#ship-address");
+  address2Field = document.querySelector("#address2");
+  postalField = document.querySelector("#postcode");
   // Create the autocomplete object, restricting the search predictions to
   // addresses in the US and Canada.
   autocomplete = new google.maps.places.Autocomplete(address1Field, {
-    componentRestrictions: { country: ["us", "ca"] },
+    componentRestrictions: {
+      country: ["us", "ca"]
+    },
     fields: ["address_components", "geometry"],
     types: ["address"],
   });
   address1Field.focus();
-
   // When the user selects an address from the drop-down, populate the
   // address fields in the form.
   autocomplete.addListener("place_changed", fillInAddress);
@@ -41,7 +48,7 @@ function fillInAddress() {
   // and then fill-in the corresponding field on the form.
   // place.address_components are google.maps.GeocoderAddressComponent objects
   // which are documented at http://goo.gle/3l5i5Mr
-  for (const component of place.address_components as google.maps.GeocoderAddressComponent[]) {
+  for (const component of place.address_components) {
     // @ts-ignore remove once typings fixed
     const componentType = component.types[0];
 
@@ -65,48 +72,28 @@ function fillInAddress() {
         postcode = `${postcode}-${component.long_name}`;
         break;
       }
-
       case "locality":
-        (document.querySelector("#locality") as HTMLInputElement).value =
-          component.long_name;
+        document.querySelector("#locality").value = component.long_name;
         break;
-
       case "administrative_area_level_1": {
-        (document.querySelector("#state") as HTMLInputElement).value =
-          component.short_name;
+        document.querySelector("#state").value = component.short_name;
         break;
       }
-
       case "country":
-        (document.querySelector("#country") as HTMLInputElement).value =
-          component.long_name;
+        document.querySelector("#country").value = component.long_name;
         break;
     }
   }
 
   address1Field.value = address1;
   postalField.value = postcode;
-
   // After filling the form with address components from the Autocomplete
   // prediction, set cursor focus on the second address line to encourage
   // entry of subpremise information such as apartment, unit, or floor number.
   address2Field.focus();
 }
 
-declare global {
-  interface Window {
-    initAutocomplete: () => void;
-  }
-}
 window.initAutocomplete = initAutocomplete;
-
-
-
-
-export default function SchoolSignUp() {
-
-    // Part 2 - Academics
-    // Middle - College ? 
 
     return (
 <div>
