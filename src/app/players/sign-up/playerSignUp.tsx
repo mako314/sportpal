@@ -1,22 +1,34 @@
 import { FormEvent } from 'react'
+import { useState } from 'react'
 
 // https://nextjs.org/docs/pages/building-your-application/data-fetching/forms-and-mutations
 
+// This should join everything together, 
+
+type SportInformation = {
+  organization_name: string;
+  position_one: string;
+  position_two?: string;
+};
+
+
 export default function PlayerSignUpForm() {
 
-    async function onSubmit(event: FormEvent<HTMLFormElement>) {
-        event.preventDefault()
-     
-        const formData = new FormData(event.currentTarget)
-        const response = await fetch('/api/submit', {
-          method: 'POST',
-          body: formData,
-        })
-     
-        // Handle response if necessary
-        const data = await response.json()
-        // ...
-      }
+  const [newUser, setNewUser] = useState()
+
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+      event.preventDefault()
+    
+      const formData = new FormData(event.currentTarget)
+      const response = await fetch('/api/submit', {
+        method: 'POST',
+        body: formData,
+      })
+    
+      // Handle response if necessary
+      const data = await response.json()
+      // ...
+    }
 
 
     // Some things to consider, if linking a parents mobile and email, should we also take their name down?
@@ -44,6 +56,13 @@ export default function PlayerSignUpForm() {
     
 
     // Option to include their accolades
+
+    // Need to have state object to be sent in, with types declared
+    // Will include all of the above.
+
+    // Way to authenticate user will be done after / authenticate / cache/ cookies? 
+
+    // 
 
 
 
