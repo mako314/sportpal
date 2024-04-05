@@ -5,9 +5,9 @@ import { useState } from 'react'
 
 // This should join everything together, 
 
+// Player ( User ) consists of:
 
 // Part 1 - Basic Information
-// Name, Email, Parents Info. DOB, email, phone, password
 type BasicInformation = {
   player_first_name: string;
   player_last_name: string;
@@ -22,17 +22,12 @@ type BasicInformation = {
 };
 
 // Part 2 - Academics
-// GPA / ACT / SAT / Current School Year / Graduation date, 
-
 type SchoolInformation = {
   graduation_date: Date;
   player_school_year: number;
   player_act_score: number | string;
   player_sat_score: number | string;
-}
-
-
-
+};
 
 // Part 3 - Sports
 type SportInformation = {
@@ -41,11 +36,40 @@ type SportInformation = {
   position_two?: string;
 };
 
+interface UserPlayerInformation  {
+  player_basic_info: BasicInformation;
+  player_school_info: SchoolInformation;
+  player_sport_info: SportInformation;
+}
 
 
 export default function PlayerSignUpForm() {
 
-  const [newUser, setNewUser] = useState()
+  const [userPlayerInfo, setUserPlayerInfo] = useState<UserPlayerInformation>({
+    player_basic_info: {
+      player_first_name: '',
+      player_last_name: '',
+      player_phone: 0, // Consider using string
+      player_email: '',
+      player_password: '',
+      player_dob: new Date(),
+      parent_first_name: '',
+      parent_last_name: '',
+      parent_email: '',
+      parent_phone: ''
+    },
+    player_school_info: {
+      graduation_date: new Date(), 
+      player_school_year: 0,
+      player_act_score: 0,
+      player_sat_score: 0
+    },
+    player_sport_info: {
+      organization_name: '',
+      position_one: '',
+      position_two: ''
+    }
+  });
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
       event.preventDefault()
