@@ -5,11 +5,42 @@ import { useState } from 'react'
 
 // This should join everything together, 
 
+
+// Part 1 - Basic Information
+// Name, Email, Parents Info. DOB, email, phone, password
+type BasicInformation = {
+  player_first_name: string;
+  player_last_name: string;
+  player_phone: number;
+  player_email: string;
+  player_password: string;
+  player_dob: Date;
+  parent_first_name: string;
+  parent_last_name: string;
+  parent_email: string;
+  parent_phone: string;
+};
+
+// Part 2 - Academics
+// GPA / ACT / SAT / Current School Year / Graduation date, 
+
+type SchoolInformation = {
+  graduation_date: Date;
+  player_school_year: number;
+  player_act_score: number | string;
+  player_sat_score: number | string;
+}
+
+
+
+
+// Part 3 - Sports
 type SportInformation = {
   organization_name: string;
   position_one: string;
   position_two?: string;
 };
+
 
 
 export default function PlayerSignUpForm() {
