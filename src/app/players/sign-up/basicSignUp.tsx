@@ -5,7 +5,7 @@ import { FormEvent } from 'react'
 export default function BasicSignUpInfo() {
 
     // Part 1 - Basic Information
-    // Name, Email, Parents Info.
+    // Name, Email, Parents Info. DOB, email, phone, password
 
     return (
         <>
