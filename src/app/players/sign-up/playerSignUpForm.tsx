@@ -13,10 +13,13 @@ import BasicSignUpInfo from './basicSignUp';
 
 // https://stackoverflow.com/questions/74965849/youre-importing-a-component-that-needs-usestate-it-only-works-in-a-client-comp
 
+
+// Ideally, we also style these forms a bit more.
+
+
+
 // This should join everything together, 
-
 // Player ( User ) consists of:
-
 // Part 1 - Basic Information
 type BasicInformation = {
   player_first_name: string;
