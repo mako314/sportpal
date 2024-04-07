@@ -1,5 +1,5 @@
 import React from 'react';
-import { UserPlayerInformation } from './playerSignUp'
+import { UserPlayerInformation } from './playerSignUpForm'
 import { FormEvent } from 'react'
 
 // https://nextjs.org/docs/pages/building-your-application/data-fetching/forms-and-mutations

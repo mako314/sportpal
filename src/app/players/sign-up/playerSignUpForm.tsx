@@ -1,3 +1,5 @@
+"use client"; // This is a client component 👈🏽
+
 import { FormEvent } from 'react'
 import { useState } from 'react'
 
@@ -6,6 +8,10 @@ import BasicSignUpInfo from './basicSignUp';
 // https://nextjs.org/docs/pages/building-your-application/data-fetching/forms-and-mutations
 // https://react.dev/learn/choosing-the-state-structure#principles-for-structuring-state
 // https://react.dev/learn/typescript
+
+// https://nextjs.org/docs/app/building-your-application/rendering
+
+// https://stackoverflow.com/questions/74965849/youre-importing-a-component-that-needs-usestate-it-only-works-in-a-client-comp
 
 // This should join everything together, 
 

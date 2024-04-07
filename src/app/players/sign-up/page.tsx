@@ -1,4 +1,4 @@
-import PlayerSignUpForm from "./playerSignUp"
+import PlayerSignUpForm from "./playerSignUpForm"
 
 export default function PlayerSignUpPage() {
 
