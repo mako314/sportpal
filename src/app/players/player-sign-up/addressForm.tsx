@@ -10,10 +10,7 @@ export default function SchoolSignUp() {
 // 1. Help the user select a place
 // 2. Retrieve the address components associated with that place
 // 3. Populate the form fields with those address components.
-// This sample requires the Places library, Maps JavaScript API.
-// Include the libraries=places parameter when you first load the API.
-// For example: <script
-// src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
 let autocomplete;
 let address1Field;
 let address2Field;
@@ -147,10 +144,7 @@ https://developers.google.com/maps/documentation/javascript/examples/places-auto
       See https://developers.google.com/maps/documentation/javascript/load-maps-js-api
       for more information.
       --> */}
-    <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initAutocomplete&libraries=places&v=weekly"
-      defer
-    ></script>
+
   </div>
     )
   }

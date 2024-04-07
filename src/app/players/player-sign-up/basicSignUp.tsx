@@ -1,11 +1,29 @@
+import React from 'react';
+import { UserPlayerInformation } from './playerSignUp'
 import { FormEvent } from 'react'
 
 // https://nextjs.org/docs/pages/building-your-application/data-fetching/forms-and-mutations
 
-export default function BasicSignUpInfo() {
+
+interface BasicSignUpInfoProps {
+    userPlayerInfo: UserPlayerInformation;
+    setUserPlayerInfo: (info: UserPlayerInformation) => void;
+  }
+
+const BasicSignUpInfo: React.FC<BasicSignUpInfoProps> = ({ setUserPlayerInfo, userPlayerInfo }) => {
 
     // Part 1 - Basic Information
     // Name, Email, Parents Info. DOB, email, phone, password
+
+    const handleChange = (e) => {
+        const {name, value} = e.target
+        // const bookToAdd = 
+        setUserPlayerInfo(
+            {...userPlayerInfo,
+            [name]: value}
+        )
+        // return null;
+    }
 
     return (
         <>
@@ -70,3 +88,5 @@ export default function BasicSignUpInfo() {
         </>
     )
   }
+
+export default BasicSignUpInfo;

@@ -1,7 +1,11 @@
 import { FormEvent } from 'react'
 import { useState } from 'react'
 
+import BasicSignUpInfo from './basicSignUp';
+
 // https://nextjs.org/docs/pages/building-your-application/data-fetching/forms-and-mutations
+// https://react.dev/learn/choosing-the-state-structure#principles-for-structuring-state
+// https://react.dev/learn/typescript
 
 // This should join everything together, 
 
@@ -11,10 +15,10 @@ import { useState } from 'react'
 type BasicInformation = {
   player_first_name: string;
   player_last_name: string;
-  player_phone: number;
+  player_phone: string;
   player_email: string;
   player_password: string;
-  player_dob: Date;
+  player_dob: string;
   parent_first_name: string;
   parent_last_name: string;
   parent_email: string;
@@ -23,10 +27,10 @@ type BasicInformation = {
 
 // Part 2 - Academics
 type SchoolInformation = {
-  graduation_date: Date;
+  graduation_date: string;
   player_school_year: number;
-  player_act_score: number | string;
-  player_sat_score: number | string;
+  player_act_score: number;
+  player_sat_score: number;
 };
 
 // Part 3 - Sports
@@ -36,7 +40,7 @@ type SportInformation = {
   position_two?: string;
 };
 
-interface UserPlayerInformation  {
+export interface UserPlayerInformation  {
   player_basic_info: BasicInformation;
   player_school_info: SchoolInformation;
   player_sport_info: SportInformation;
@@ -45,21 +49,24 @@ interface UserPlayerInformation  {
 
 export default function PlayerSignUpForm() {
 
+  // https://stackoverflow.com/questions/71324797/react-typescript-what-does-dispatchsetstateactionboolean-stand-for
+  // Pretty good, talks about hovering over the state to see the <Dispatch> stuff 
+
   const [userPlayerInfo, setUserPlayerInfo] = useState<UserPlayerInformation>({
     player_basic_info: {
       player_first_name: '',
       player_last_name: '',
-      player_phone: 0, // Consider using string
+      player_phone: '', 
       player_email: '',
       player_password: '',
-      player_dob: new Date(),
+      player_dob: '',
       parent_first_name: '',
       parent_last_name: '',
       parent_email: '',
       parent_phone: ''
     },
     player_school_info: {
-      graduation_date: new Date(), 
+      graduation_date: '', 
       player_school_year: 0,
       player_act_score: 0,
       player_sat_score: 0
@@ -119,11 +126,14 @@ export default function PlayerSignUpForm() {
 
     // 
 
-
+    // https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/basic_type_example/
 
     return (
     <form name="wf-form-player-signup" method="post">
-
+      <BasicSignUpInfo 
+        userPlayerInfo={userPlayerInfo}
+        setUserPlayerInfo={setUserPlayerInfo} 
+      />
 
         <label className="mb-6 flex items-center justify-start pb-12 pl-5 font-medium md:mb-10 lg:mb-1">
             <input type="checkbox" name="checkbox" className="float-left -ml-[20px] mt-1" />
