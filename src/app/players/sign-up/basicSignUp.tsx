@@ -17,7 +17,10 @@ const BasicSignUpInfo: React.FC<BasicSignUpInfoProps> = ({ setUserPlayerInfo, us
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const {name, value} = e.target
-        // const bookToAdd = 
+        
+        console.log("The name attribute being changed:", name)
+        console.log("The value attribute being added:", value)
+
         setUserPlayerInfo(
             {...userPlayerInfo,
             player_basic_info: {
@@ -149,7 +152,7 @@ const BasicSignUpInfo: React.FC<BasicSignUpInfoProps> = ({ setUserPlayerInfo, us
             <label htmlFor="player_password" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Password</label>
             <input 
             type="player_password" 
-            name="player_last_name" 
+            name="player_password" 
             className="mb-4 block h-9 w-full rounded-md border border-solid border-black px-3 py-6 pl-14 text-sm text-[#333333]" 
             placeholder="Password (min 8 characters)" 
             value={userPlayerInfo.player_basic_info.player_password}
