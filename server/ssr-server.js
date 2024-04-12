@@ -1,7 +1,9 @@
 // https://expressjs.com/en/starter/basic-routing.html
 // https://blog.logrocket.com/build-server-rendered-react-app-next-express/
+
 // node server/ssr-server.js
 // nvm use 18.17.0 
+
 require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`
 });

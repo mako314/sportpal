@@ -4,6 +4,7 @@ import { FormEvent } from 'react'
 import { useState } from 'react'
 
 import BasicSignUpInfo from './basicSignUp';
+import AddressForm from './addressForm'
 
 // https://nextjs.org/docs/pages/building-your-application/data-fetching/forms-and-mutations
 // https://react.dev/learn/choosing-the-state-structure#principles-for-structuring-state
@@ -143,6 +144,11 @@ export default function PlayerSignUpForm() {
         userPlayerInfo={userPlayerInfo}
         setUserPlayerInfo={setUserPlayerInfo} 
       />
+
+      <AddressForm
+      
+      />
+
 
         <label className="mb-6 flex items-center justify-start pb-12 pl-5 font-medium md:mb-10 lg:mb-1">
             <input type="checkbox" name="checkbox" className="float-left -ml-[20px] mt-1" />

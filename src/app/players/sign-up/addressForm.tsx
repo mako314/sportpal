@@ -2,7 +2,44 @@
 // https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-addressform#maps_places_autocomplete_addressform-typescript
 // https://jsfiddle.net/gh/get/library/pure/googlemaps/js-samples/tree/master/dist/samples/places-autocomplete-addressform/jsfiddle
 
-export default function SchoolSignUp() {
+
+// Calling .envs in Next.js : https://refine.dev/blog/next-js-environment-variables/#using-environment-variables-in-the-browser
+// https://nextjs.org/docs/app/building-your-application/configuring/environment-variables#bundling-environment-variables-for-the-browser
+// '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}'
+
+import React, { useEffect } from 'react';
+
+export default function AddressForm() {
+
+  useEffect(() => {
+    // Function to dynamically load the Google Maps script
+    const loadGoogleMapsScript = (callback) => {
+      if (typeof google !== 'undefined') {
+        // Google Maps script is already loaded
+        callback();
+        return;
+      }
+      console.log("The environment variable : ", process.env.NEXT_PUBLIC_GOOGLE_PLACES_KEY)
+      const script = document.createElement('script');
+      script.id = 'google-maps-script'; // Assign an ID for easy removal
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_PLACES_KEY}&libraries=places&v=weekly`;
+      document.head.append(script);
+      script.onload = () => {
+        callback();
+      };
+    };
+
+    loadGoogleMapsScript(initAutocomplete);
+
+    // Cleanup function
+    return () => {
+      // Remove the script element by ID
+      const script = document.getElementById('google-maps-script');
+      if (script) {
+        document.head.removeChild(script);
+      }
+    };
+  }, []);
 
 // Address Form 
 
@@ -92,59 +129,36 @@ function fillInAddress() {
 
 window.initAutocomplete = initAutocomplete;
 
-    return (
-<div>
-    {/* <!-- Note: The address components in this sample are based on North American address format. You might need to adjust them for the locations relevant to your app. For more information, see
-https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-addressform
-    --> */}
-
-    <form id="address-form" action="" method="get" autocomplete="off">
-      <p className="title">Sample address form for North America</p>
-      <p className="note"><em>* = required field</em></p>
-      <label className="full-field">
-        {/* <!-- Avoid the word "address" in id, name, or label text to avoid browser autofill from conflicting with Place Autocomplete. Star or comment bug https://crbug.com/587466 to request Chromium to honor autocomplete="off" attribute. --> */}
-        <span className="form-label">Deliver to*</span>
-        <input
-          id="ship-address"
-          name="ship-address"
-          required
-          autocomplete="off"
-        />
-      </label>
-      <label className="full-field">
-        <span className="form-label">Apartment, unit, suite, or floor #</span>
-        <input id="address2" name="address2" />
-      </label>
-      <label className="full-field">
-        <span className="form-label">City*</span>
-        <input id="locality" name="locality" required />
-      </label>
-      <label className="slim-field-start">
-        <span className="form-label">State/Province*</span>
-        <input id="state" name="state" required />
-      </label>
-      <label className="slim-field-end" for="postal_code">
-        <span className="form-label">Postal code*</span>
-        <input id="postcode" name="postcode" required />
-      </label>
-      <label className="full-field">
-        <span className="form-label">Country/Region*</span>
-        <input id="country" name="country" required />
-      </label>
-      <button type="button" className="my-button">Save address</button>
-
-      {/* <!-- Reset button provided for development testing convenience.
-  Not recommended for user-facing forms due to risk of mis-click when aiming for Submit button. --> */}
-      <input type="reset" value="Clear form" />
+return (
+  <div className="h-full bg-white p-5 font-roboto text-gray-600">
+    <form className="flex flex-wrap items-center max-w-md mx-auto my-10 p-5" autoComplete="off">
+      <div className="w-full mb-4">
+        <label className="block mb-2 text-sm text-gray-800" htmlFor="ship-address">Address*</label>
+        <input className="w-full p-2 border-b-2 border-gray-400 focus:outline-none" id="ship-address" name="ship-address" required />
+      </div>
+      <div className="w-full mb-4">
+        <label className="block mb-2 text-sm text-gray-800" htmlFor="address2">Apartment, unit, suite, or floor #</label>
+        <input className="w-full p-2 border-b-2 border-gray-400 focus:outline-none" id="address2" name="address2" />
+      </div>
+      <div className="w-full mb-4">
+        <label className="block mb-2 text-sm text-gray-800" htmlFor="locality">City*</label>
+        <input className="w-full p-2 border-b-2 border-gray-400 focus:outline-none" id="locality" name="locality" required />
+      </div>
+      <div className="w-1/2 pr-2 mb-4">
+        <label className="block mb-2 text-sm text-gray-800" htmlFor="state">State/Province*</label>
+        <input className="w-full p-2 border-b-2 border-gray-400 focus:outline-none" id="state" name="state" required />
+      </div>
+      <div className="w-1/2 pl-2 mb-4">
+        <label className="block mb-2 text-sm text-gray-800" htmlFor="postcode">Postal code*</label>
+        <input className="w-full p-2 border-b-2 border-gray-400 focus:outline-none" id="postcode" name="postcode" required />
+      </div>
+      <div className="w-full mb-4">
+        <label className="block mb-2 text-sm text-gray-800" htmlFor="country">Country/Region*</label>
+        <input className="w-full p-2 border-b-2 border-gray-400 focus:outline-none" id="country" name="country" required />
+      </div>
+      <button type="button" className="bg-black rounded text-white px-6 py-2 hover:bg-gray-600">Save address</button>
+      <input type="reset" value="Clear form" className="ml-4 bg-transparent text-gray-600 text-sm" />
     </form>
-
-    {/* <!-- 
-      The `defer` attribute causes the callback to execute after the full HTML document has been parsed. For non-blocking uses, avoiding race conditions,
-      and consistent behavior across browsers, consider loading using Promises.
-      See https://developers.google.com/maps/documentation/javascript/load-maps-js-api
-      for more information.
-      --> */}
-
   </div>
-    )
+);
   }
