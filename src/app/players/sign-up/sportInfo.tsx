@@ -5,8 +5,6 @@ import { FormEvent } from 'react'
 export default function SportSignUp() {
 
     // https://excalidraw.com/#json=duh3nj3TSZjOcTjmxKhxT,ll7H6l85w19xbr9eezyfFA
-
-
     // Part 3 - Sports
     // Should include club team option, school team, travel team, academy team?
     // In this part, one may get away with having them write positions and such, but maybe it's better to have our own on hand? 
@@ -27,11 +25,34 @@ export default function SportSignUp() {
     // Secondary Position
 
     // Coaches --- Can be tied in VIA team.
-
     // Most definitely need to create a sport table for sports applicable to the site, this way when a players account is created they can tie it to that sport + team.
+
+    // I think the best way to do this
+    // 1) Create sport table < - may not be needed honestly.
+    // 2) Teams should be linked to sports, create fk relationship with sport
+    // 3) Create 5-10 team example for X sport, we'll do soccer
+
+    // Process should be, individual selects sport, Team search can be based off of, name, zipcode, school > team not yet registered? > register team > team gets added to table
+    // New FK should only be teams to sport, where if a team is deleted, we delete that entry also from sport.
+    
+
+    // 4/4/2024
+
+    // Lets try this without a sports table for now, we'll pull sports by the teams sport field
+    // So from this, state will be:
+    // 1st position
+    // 2nd position
+    // Org Name
+
+    // What would be better, the opportunity to add their achievements upon sign up, one post,
+    // OR
+    // After signup, allow addition of accolades
 
     return (
         <>
+
+
+        {/* This should be a search form to search the database for the teams that currently exist */}
         <div className="sm:col-span-2">
             <label htmlFor="act" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">ACT</label>
             <input 
@@ -39,6 +60,9 @@ export default function SportSignUp() {
             className="mb-4 block h-9 w-full rounded-md border border-solid border-black px-3 py-6 pl-14 text-sm text-[#333333]" 
             placeholder="ACT"/>
         </div>
+
+        {/* Position selection, will allow 2 positions to be selected. Becomes available after selecting sport? */}
+
          </>
     )
   }
