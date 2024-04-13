@@ -41,7 +41,14 @@ type BasicInformation = {
   parent_phone: string;
 };
 
-// Part 2 - Academics
+// Part 2 - Sports
+type SportInformation = {
+  organization_name: string;
+  position_one: string;
+  position_two?: string;
+};
+
+// Part 3 - Academics
 type SchoolInformation = {
   graduation_date: string;
   player_school_year: number;
@@ -49,12 +56,7 @@ type SchoolInformation = {
   player_sat_score: number;
 };
 
-// Part 3 - Sports
-type SportInformation = {
-  organization_name: string;
-  position_one: string;
-  position_two?: string;
-};
+
 
 export interface UserPlayerInformation  {
   player_basic_info: BasicInformation;
@@ -124,23 +126,22 @@ export default function PlayerSignUpForm() {
     // Part 1 - Basic Information
     // Name, Email, Parents Info.
 
-    // Part 2 - Academics
-    // GPA
-    // ACT / SAT
-    // Current School Year
-    // Graduation date, 
-    // College Major?
-    // Middle - College ? 
-
-    // Part 3 - Sports
+    // Part 2- Sports
     // Should include club team option, school team, travel team, academy team?
     // In this part, one may get away with having them write positions and such, but maybe it's better to have our own on hand? 
     // Sport
     // Player position
     // Secondary Position
     // Coaches 
-    
 
+    // Part 3 - Academics
+    // GPA
+    // ACT / SAT
+    // Current School Year
+    // Graduation date, 
+    // College Major?
+    // Middle - College ? 
+    
     // Option to include their accolades
 
     // Need to have state object to be sent in, with types declared
