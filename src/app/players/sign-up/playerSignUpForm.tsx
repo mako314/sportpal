@@ -152,6 +152,8 @@ export default function PlayerSignUpForm() {
 
     // https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/basic_type_example/
 
+    console.log( " Player signing up : ", userPlayerInfo)
+
     return (
     <form name="wf-form-player-signup" method="post">
       <BasicSignUpInfo 

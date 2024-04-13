@@ -2,6 +2,7 @@
 // https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-addressform#maps_places_autocomplete_addressform-typescript
 // https://jsfiddle.net/gh/get/library/pure/googlemaps/js-samples/tree/master/dist/samples/places-autocomplete-addressform/jsfiddle
 
+// https://codesandbox.io/p/sandbox/muddy-pine-88gugr?file=%2Fsrc%2Findex.ts%3A4%2C9
 
 // Calling .envs in Next.js : https://refine.dev/blog/next-js-environment-variables/#using-environment-variables-in-the-browser
 // https://nextjs.org/docs/app/building-your-application/configuring/environment-variables#bundling-environment-variables-for-the-browser
@@ -10,6 +11,15 @@
 
 import React, { useEffect } from 'react';
 import { UserPlayerInformation } from './playerSignUpForm'
+
+type AdddressInformation = {
+  player_address: string;
+  player_apartment: string;
+  player_city: string;
+  player_state: string;
+  player_postal_code: string;
+  player_country: string;
+};
 
 interface BasicSignUpInfoProps {
   userPlayerInfo: UserPlayerInformation;
@@ -65,6 +75,8 @@ function initAutocomplete() {
   address1Field = document.querySelector("#ship-address");
   address2Field = document.querySelector("#address2");
   postalField = document.querySelector("#postcode");
+
+
   // Create the autocomplete object, restricting the search predictions to
   // addresses in the US and Canada.
   autocomplete = new google.maps.places.Autocomplete(address1Field, {
@@ -81,20 +93,22 @@ function initAutocomplete() {
 }
 
 function fillInAddress() {
+
   // Get the place details from the autocomplete object.
   const place = autocomplete.getPlace();
+
+  const updates: AdddressInformation = {
+    player_address: "",
+    player_apartment: "",
+    player_city: "",
+    player_state: "",
+    player_postal_code: "",
+    player_country: "",
+  }; // Object to hold updates
+
   let address1 = "";
   let postcode = "";
-
-  // function updateState(){
-  //   setUserPlayerInfo({...userPlayerInfo,
-  //     player_basic_info: {
-  //             ...userPlayerInfo.player_basic_info,
-  //             [name]: value,
-  //     },
-  // })}
-
-
+  let apartment = "";
   // Get each component of the address from the place details,
   // and then fill-in the corresponding field on the form.
   // place.address_components are google.maps.GeocoderAddressComponent objects
@@ -103,63 +117,102 @@ function fillInAddress() {
 
 
   // So this is where we must considering the charging stuff, I remember google talking about being responsible for billing charges for all the things one calls. 
-
   // https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-addressform#maps_places_autocomplete_addressform-typescript
-
   // I do not call set fields, I call autocomplete.getPlace()
   // " You can specify which place data fields to return by calling Autocomplete.setFields(), and specifying one or more place data fields. Caution: If you don't call Autocomplete.setFields(), then all of the available place data fields for a place result are returned, and you are billed for all of them. "
   // https://developers.google.com/maps/documentation/javascript/reference/places-widget#Autocomplete.getPlace
-
   // We'll see how the billing handles this 
 
   // Testing stuff with console log! 
   console.log(place.address_components)
+
   for (const component of place.address_components) {
     // @ts-ignore remove once typings fixed
     const componentType = component.types[0];
 
     switch (componentType) {
-      case "street_number": {0
+      case "street_number": {
+
         address1 = `${component.long_name} ${address1}`;
         console.log("street #:", address1)
+
+        updates['player_address'] = `${component.long_name} ${updates['player_address'] || ''}`;
         break;
       }
 
       case "route": {
-        address1 += component.short_name;
+        address1 += component.long_name;
         console.log("case route:", address1 )
+
+         // Append or set the street name
+         updates['player_address'] = `${updates['player_address'] || ''} ${component.long_name}`;
+
         break;
       }
 
       case "postal_code": {
+
         postcode = `${component.long_name}${postcode}`;
         console.log("postal_code:", postcode )
+
+        // updates['player_postal_code'] = component.long_name; // Set Postal Code - 4 numbers
         break;
       }
 
       case "postal_code_suffix": {
+
         postcode = `${postcode}-${component.long_name}`;
         console.log("postal_code_suffix:", postcode )
+
+        updates['player_postal_code'] = `${postcode}`; // Set Postal Code - the more than 4 number
         break;
       }
       case "locality":
+
         document.querySelector("#locality").value = component.long_name;
         console.log("city:", component.long_name )
+
+        updates['player_city'] = component.long_name; // Set Postal Code - the more than 4 number
         break;
       case "administrative_area_level_1": {
-        document.querySelector("#state").value = component.short_name;
-        console.log("state:", component.short_name )
+        document.querySelector("#state").value = component.long_name;
+        console.log("state:", component.long_name )
+
+        updates['player_state'] = component.long_name; // Set State - Swapped out short for long
         break;
       }
       case "country":
         document.querySelector("#country").value = component.long_name;
         console.log("country:", component.long_name)
+
+        updates['player_country'] = component.long_name; // Set Country
         break;
     }
   }
 
   address1Field.value = address1;
   postalField.value = postcode;
+
+  // Address 2 field captures apartment, unit, suite, or floor #
+  apartment = address2Field.value 
+  updates['player_apartment'] = apartment; // Set Apartment
+
+  console.log(apartment)
+
+  console.log("THE UPDATE OBJECT:", updates)
+
+
+
+  setUserPlayerInfo(
+    {...userPlayerInfo,
+    player_basic_info: {
+            ...userPlayerInfo.player_basic_info,
+            ...updates,
+    },
+})
+
+
+
   // After filling the form with address components from the Autocomplete
   // prediction, set cursor focus on the second address line to encourage
   // entry of subpremise information such as apartment, unit, or floor number.
