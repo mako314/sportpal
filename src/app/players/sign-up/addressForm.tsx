@@ -7,9 +7,16 @@
 // https://nextjs.org/docs/app/building-your-application/configuring/environment-variables#bundling-environment-variables-for-the-browser
 // '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}'
 
-import React, { useEffect } from 'react';
 
-export default function AddressForm() {
+import React, { useEffect } from 'react';
+import { UserPlayerInformation } from './playerSignUpForm'
+
+interface BasicSignUpInfoProps {
+  userPlayerInfo: UserPlayerInformation;
+  setUserPlayerInfo: (info: UserPlayerInformation) => void;
+}
+
+const AddressForm: React.FC<BasicSignUpInfoProps> = ({ setUserPlayerInfo, userPlayerInfo }) => {
 
   useEffect(() => {
     // Function to dynamically load the Google Maps script
@@ -53,6 +60,7 @@ let address1Field;
 let address2Field;
 let postalField;
 
+
 function initAutocomplete() {
   address1Field = document.querySelector("#ship-address");
   address2Field = document.querySelector("#address2");
@@ -78,43 +86,74 @@ function fillInAddress() {
   let address1 = "";
   let postcode = "";
 
+  // function updateState(){
+  //   setUserPlayerInfo({...userPlayerInfo,
+  //     player_basic_info: {
+  //             ...userPlayerInfo.player_basic_info,
+  //             [name]: value,
+  //     },
+  // })}
+
+
   // Get each component of the address from the place details,
   // and then fill-in the corresponding field on the form.
   // place.address_components are google.maps.GeocoderAddressComponent objects
   // which are documented at http://goo.gle/3l5i5Mr
+
+
+
+  // So this is where we must considering the charging stuff, I remember google talking about being responsible for billing charges for all the things one calls. 
+
+  // https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-addressform#maps_places_autocomplete_addressform-typescript
+
+  // I do not call set fields, I call autocomplete.getPlace()
+  // " You can specify which place data fields to return by calling Autocomplete.setFields(), and specifying one or more place data fields. Caution: If you don't call Autocomplete.setFields(), then all of the available place data fields for a place result are returned, and you are billed for all of them. "
+  // https://developers.google.com/maps/documentation/javascript/reference/places-widget#Autocomplete.getPlace
+
+  // We'll see how the billing handles this 
+
+  // Testing stuff with console log! 
+  console.log(place.address_components)
   for (const component of place.address_components) {
     // @ts-ignore remove once typings fixed
     const componentType = component.types[0];
 
     switch (componentType) {
-      case "street_number": {
+      case "street_number": {0
         address1 = `${component.long_name} ${address1}`;
+        console.log("street #:", address1)
         break;
       }
 
       case "route": {
         address1 += component.short_name;
+        console.log("case route:", address1 )
         break;
       }
 
       case "postal_code": {
         postcode = `${component.long_name}${postcode}`;
+        console.log("postal_code:", postcode )
         break;
       }
 
       case "postal_code_suffix": {
         postcode = `${postcode}-${component.long_name}`;
+        console.log("postal_code_suffix:", postcode )
         break;
       }
       case "locality":
         document.querySelector("#locality").value = component.long_name;
+        console.log("city:", component.long_name )
         break;
       case "administrative_area_level_1": {
         document.querySelector("#state").value = component.short_name;
+        console.log("state:", component.short_name )
         break;
       }
       case "country":
         document.querySelector("#country").value = component.long_name;
+        console.log("country:", component.long_name)
         break;
     }
   }
@@ -129,9 +168,13 @@ function fillInAddress() {
 
 window.initAutocomplete = initAutocomplete;
 
+
+
 return (
   <div className="h-full bg-white p-5 font-roboto text-gray-600">
-    <form className="flex flex-wrap items-center max-w-md mx-auto my-10 p-5" autoComplete="off">
+
+
+
       <div className="w-full mb-4">
         <label className="block mb-2 text-sm text-gray-800" htmlFor="ship-address">Address*</label>
         <input className="w-full p-2 border-b-2 border-gray-400 focus:outline-none" id="ship-address" name="ship-address" required />
@@ -156,9 +199,14 @@ return (
         <label className="block mb-2 text-sm text-gray-800" htmlFor="country">Country/Region*</label>
         <input className="w-full p-2 border-b-2 border-gray-400 focus:outline-none" id="country" name="country" required />
       </div>
+
       <button type="button" className="bg-black rounded text-white px-6 py-2 hover:bg-gray-600">Save address</button>
+
       <input type="reset" value="Clear form" className="ml-4 bg-transparent text-gray-600 text-sm" />
-    </form>
+ 
+
   </div>
 );
   }
+
+export default AddressForm;

@@ -160,7 +160,8 @@ export default function PlayerSignUpForm() {
       />
 
       <AddressForm
-      
+      userPlayerInfo={userPlayerInfo}
+      setUserPlayerInfo={setUserPlayerInfo} 
       />
 
 
