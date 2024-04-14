@@ -1,5 +1,7 @@
 import React from 'react';
 import { UserPlayerInformation } from './playerSignUpForm'
+import { useForm } from 'react-hook-form';
+
 import { FormEvent } from 'react'
 
 // https://nextjs.org/docs/pages/building-your-application/data-fetching/forms-and-mutations
@@ -31,8 +33,20 @@ const BasicSignUpInfo: React.FC<BasicSignUpInfoProps> = ({ setUserPlayerInfo, us
         // return null;
 }
 
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const onSubmit = data => console.log(data);
+    console.log(errors);
+
     return (
         <>
+
+        {/* React Hook Forms */}
+        <form onSubmit={handleSubmit(onSubmit)}>
+        <input type="text" placeholder="Player First Name" {...register("Player First Name", {, maxLength: 15})} />
+
+        <input type="submit" />
+        </form>
+
         <div className="sm:col-span-2">
             <label htmlFor="player_first_name" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">First Name</label>
             <input 

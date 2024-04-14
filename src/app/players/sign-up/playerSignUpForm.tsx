@@ -158,6 +158,10 @@ export default function PlayerSignUpForm() {
     // https://www.reddit.com/r/nextjs/comments/1ah721o/what_is_everyones_favorite_tool_for_creating/
 
 
+    // https://react-hook-form.com/get-started#ReactWebVideoTutorial
+
+    // https://react-hook-form.com/advanced-usage 
+
     console.log( " Player signing up : ", userPlayerInfo)
 
     return (
