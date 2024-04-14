@@ -9,6 +9,7 @@ import { useForm, FormProvider, useFormContext } from "react-hook-form"
 import BasicSignUpInfo from './basicSignUp';
 import AddressForm from './addressForm'
 import SportSignUp from './sports/sportInfo';
+import { Single_Day } from 'next/font/google';
 
 // https://nextjs.org/docs/pages/building-your-application/data-fetching/forms-and-mutations
 // https://react.dev/learn/choosing-the-state-structure#principles-for-structuring-state
@@ -69,7 +70,19 @@ export interface UserPlayerInformation  {
 export default function PlayerSignUpForm() {
   const methods = useForm()
 
-  const onSubmit = (data) => console.log("LOOK FOR THIS DATA:", data)
+  const onSubmit = (data) => {
+
+    // On the bright side, I managed to get the data and set everything up today, now it will just be adding it to the state object.
+    console.log("LOOK FOR THIS DATA:", data)
+  //   setUserPlayerInfo(
+  //     {...userPlayerInfo,
+  //     player_basic_info: {
+  //             ...userPlayerInfo.player_basic_info,
+  //             ...updates,
+  //     },
+  // })
+  
+  }
 
   // https://stackoverflow.com/questions/71324797/react-typescript-what-does-dispatchsetstateactionboolean-stand-for
   // Pretty good, talks about hovering over the state to see the <Dispatch> stuff 
@@ -170,6 +183,20 @@ export default function PlayerSignUpForm() {
     // The idea here is to use form provider to have the form context and props available in the children components
 
     // https://react-hook-form.com/docs/formprovider
+
+
+
+
+    //  Present Info
+    // basic / parent / etc
+    // address
+      // sports 
+      // soccer, etc, 
+      // teams
+      // sort by area and such?
+      // Position -- Extra details?
+    
+    // Current school standing / etc 
 
 
 
