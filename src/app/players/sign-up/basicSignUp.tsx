@@ -1,8 +1,9 @@
 import React from 'react';
 import { UserPlayerInformation } from './playerSignUpForm'
-import { useForm } from 'react-hook-form';
 
 import { FormEvent } from 'react'
+
+import { useFormContext } from 'react-hook-form';
 
 // https://nextjs.org/docs/pages/building-your-application/data-fetching/forms-and-mutations
 
@@ -12,11 +13,12 @@ interface BasicSignUpInfoProps {
     setUserPlayerInfo: (info: UserPlayerInformation) => void;
   }
 
+
+
 const BasicSignUpInfo: React.FC<BasicSignUpInfoProps> = ({ setUserPlayerInfo, userPlayerInfo }) => {
 
-    const { register, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
-    console.log(errors);
+    const { register, handleSubmit, formState: { errors } } = useFormContext();
+    console.log("The Errors:",errors);
 
     // Part 1 - Basic Information
     // Name, Email, Parents Info. DOB, email, phone, password
@@ -46,11 +48,11 @@ const BasicSignUpInfo: React.FC<BasicSignUpInfoProps> = ({ setUserPlayerInfo, us
 
     return (
         
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <div>
             {/* React Hook Forms */}
         <div className="sm:col-span-2">
             <label htmlFor="player_first_name" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">First Name</label>
-            <input {...register("firstName")} 
+            <input {...register("player_first_name")} 
             className="mb-4 block h-9 w-full rounded-md border border-solid border-black px-3 py-6 pl-14 text-sm text-[#333333]" 
             placeholder="First Name" 
             type="text"
@@ -59,7 +61,7 @@ const BasicSignUpInfo: React.FC<BasicSignUpInfoProps> = ({ setUserPlayerInfo, us
 
         <div className="sm:col-span-2">
             <label htmlFor="player_last_name" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Last Name</label>
-            <input {...register("firstName")} 
+            <input {...register("player_last_name")} 
             className="mb-4 block h-9 w-full rounded-md border border-solid border-black px-3 py-6 pl-14 text-sm text-[#333333]" 
             placeholder="Last Name"
             type="text"
@@ -68,7 +70,7 @@ const BasicSignUpInfo: React.FC<BasicSignUpInfoProps> = ({ setUserPlayerInfo, us
 
         <div className="sm:col-span-2">
             <label htmlFor="player_dob" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Date of Birth</label>
-            <input {...register("firstName")} 
+            <input {...register("player_dob")} 
             className="mb-4 block h-9 w-full rounded-md border border-solid border-black px-3 py-6 pl-14 text-sm text-[#333333]"  
             type="date"
             />
@@ -108,8 +110,8 @@ const BasicSignUpInfo: React.FC<BasicSignUpInfoProps> = ({ setUserPlayerInfo, us
         </div>
 
         <div className="sm:col-span-2">
-            <label htmlFor="player_phone" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Parent Last Name</label>
-            <input {...register("player_phone")} 
+            <label htmlFor="parent_last_name" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Parent Last Name</label>
+            <input {...register("parent_last_name")} 
             className="mb-4 block h-9 w-full rounded-md border border-solid border-black px-3 py-6 pl-14 text-sm text-[#333333]" 
             placeholder="Parent Last Name"
             type="text"
@@ -142,8 +144,7 @@ const BasicSignUpInfo: React.FC<BasicSignUpInfoProps> = ({ setUserPlayerInfo, us
             type="text"
             />
         </div>
-
-        </form>
+        </div>
     )
   }
 
