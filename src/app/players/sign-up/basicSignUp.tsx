@@ -14,6 +14,10 @@ interface BasicSignUpInfoProps {
 
 const BasicSignUpInfo: React.FC<BasicSignUpInfoProps> = ({ setUserPlayerInfo, userPlayerInfo }) => {
 
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const onSubmit = data => console.log(data);
+    console.log(errors);
+
     // Part 1 - Basic Information
     // Name, Email, Parents Info. DOB, email, phone, password
 
@@ -33,21 +37,62 @@ const BasicSignUpInfo: React.FC<BasicSignUpInfoProps> = ({ setUserPlayerInfo, us
         // return null;
 }
 
-    const { register, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
-    console.log(errors);
+
 
     return (
         <>
 
         {/* React Hook Forms */}
-        <form onSubmit={handleSubmit(onSubmit)}>
-        <input type="text" placeholder="Player First Name" {...register("Player First Name", {, maxLength: 15})} />
-
-        <input type="submit" />
-        </form>
 
         <div className="sm:col-span-2">
+        <label htmlFor="player_first_name" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">First Name</label>
+        <input {...register("firstName")} 
+        className="mb-4 block h-9 w-full rounded-md border border-solid border-black px-3 py-6 pl-14 text-sm text-[#333333]" 
+        placeholder="First Name" 
+        type="text"
+        />
+        </div>
+
+        <div className="sm:col-span-2">
+        <label htmlFor="player_last_name" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Last Name</label>
+        <input {...register("firstName")} 
+        className="mb-4 block h-9 w-full rounded-md border border-solid border-black px-3 py-6 pl-14 text-sm text-[#333333]" 
+        placeholder="Last Name"
+        type="text"
+        />
+        </div>
+
+        <div className="sm:col-span-2">
+        <label htmlFor="player_dob" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Date of Birth</label>
+        <input {...register("firstName")} 
+        className="mb-4 block h-9 w-full rounded-md border border-solid border-black px-3 py-6 pl-14 text-sm text-[#333333]"  
+        type="date"
+        />
+        </div>
+
+        <div className="sm:col-span-2">
+        <label htmlFor="player_email" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Email Address</label>
+        <input {...register("player_email")} 
+        className="mb-4 block h-9 w-full rounded-md border border-solid border-black px-3 py-6 pl-14 text-sm text-[#333333]" 
+        placeholder="Email Address"
+        type="text"
+        />
+        </div>
+
+        <div className="sm:col-span-2">
+        <label htmlFor="player_phone" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Mobile Number</label>
+        <input {...register("player_phone")} 
+        className="mb-4 block h-9 w-full rounded-md border border-solid border-black px-3 py-6 pl-14 text-sm text-[#333333]" 
+        placeholder="Mobile Number"
+        type="text"
+        />
+        </div>
+
+
+
+
+
+        {/* <div className="sm:col-span-2">
             <label htmlFor="player_first_name" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">First Name</label>
             <input 
             type="text" 
@@ -104,7 +149,7 @@ const BasicSignUpInfo: React.FC<BasicSignUpInfoProps> = ({ setUserPlayerInfo, us
             value={userPlayerInfo.player_basic_info.player_phone}
             onChange={handleChange}
             />
-        </div>
+        </div> */}
 
 
         {/* 
@@ -114,6 +159,51 @@ const BasicSignUpInfo: React.FC<BasicSignUpInfoProps> = ({ setUserPlayerInfo, us
         */}
 
         <div className="sm:col-span-2">
+        <label htmlFor="parent_first_name" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Parent First Name</label>
+        <input {...register("parent_first_name")} 
+        className="mb-4 block h-9 w-full rounded-md border border-solid border-black px-3 py-6 pl-14 text-sm text-[#333333]" 
+        placeholder="Parent First Name"
+        type="text"
+        />
+        </div>
+
+        <div className="sm:col-span-2">
+        <label htmlFor="player_phone" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Parent Last Name</label>
+        <input {...register("player_phone")} 
+        className="mb-4 block h-9 w-full rounded-md border border-solid border-black px-3 py-6 pl-14 text-sm text-[#333333]" 
+        placeholder="Parent Last Name"
+        type="text"
+        />
+        </div>
+
+        <div className="sm:col-span-2">
+        <label htmlFor="parent_email" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Parents Email</label>
+        <input {...register("parent_email")} 
+        className="mb-4 block h-9 w-full rounded-md border border-solid border-black px-3 py-6 pl-14 text-sm text-[#333333]" 
+        placeholder="Parents Email"
+        type="text"
+        />
+        </div>
+
+        <div className="sm:col-span-2">
+        <label htmlFor="parent_phone" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Parents Mobile Number</label>
+        <input {...register("parent_phone")} 
+        className="mb-4 block h-9 w-full rounded-md border border-solid border-black px-3 py-6 pl-14 text-sm text-[#333333]" 
+        placeholder="Parents Mobile Number"
+        type="text"
+        />
+        </div>
+
+        <div className="sm:col-span-2">
+        <label htmlFor="player_password" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Password</label>
+        <input {...register("player_password")} 
+        className="mb-4 block h-9 w-full rounded-md border border-solid border-black px-3 py-6 pl-14 text-sm text-[#333333]" 
+        placeholder="Password"
+        type="text"
+        />
+        </div>
+
+        {/* <div className="sm:col-span-2">
             <label htmlFor="parent_first_name" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Parent First Name</label>
             <input 
             type="text" 
@@ -135,7 +225,7 @@ const BasicSignUpInfo: React.FC<BasicSignUpInfoProps> = ({ setUserPlayerInfo, us
             value={userPlayerInfo.player_basic_info.parent_last_name}
             onChange={handleChange}
             />
-        </div>
+        </div> 
 
         
         <div className="sm:col-span-2">
@@ -172,7 +262,7 @@ const BasicSignUpInfo: React.FC<BasicSignUpInfoProps> = ({ setUserPlayerInfo, us
             value={userPlayerInfo.player_basic_info.player_password}
             onChange={handleChange}
             />
-        </div>
+        </div>*/}
         </>
     )
   }
