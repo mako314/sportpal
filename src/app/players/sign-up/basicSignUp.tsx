@@ -40,6 +40,9 @@ const BasicSignUpInfo: React.FC<BasicSignUpInfoProps> = ({ setUserPlayerInfo, us
 // https://www.reddit.com/r/reactjs/comments/16xijqi/is_reacthookform_ideal_for_a_form_with_over_a/
 
 
+// https://react-hook-form.com/docs/useform/register
+
+
 
     return (
         
@@ -139,7 +142,7 @@ const BasicSignUpInfo: React.FC<BasicSignUpInfoProps> = ({ setUserPlayerInfo, us
             type="text"
             />
         </div>
-        
+
         </form>
     )
   }

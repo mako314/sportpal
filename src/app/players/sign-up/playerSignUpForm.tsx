@@ -3,6 +3,9 @@
 import { FormEvent } from 'react'
 import { useState } from 'react'
 
+
+import { useForm, FormProvider, useFormContext } from "react-hook-form"
+
 import BasicSignUpInfo from './basicSignUp';
 import AddressForm from './addressForm'
 import SportSignUp from './sports/sportInfo';
@@ -17,9 +20,6 @@ import SportSignUp from './sports/sportInfo';
 
 
 // Ideally, we also style these forms a bit more.
-
-
-
 // This should join everything together, 
 // Player ( User ) consists of:
 // Part 1 - Basic Information
@@ -67,6 +67,9 @@ export interface UserPlayerInformation  {
 
 
 export default function PlayerSignUpForm() {
+  const methods = useForm()
+
+  const onSubmit = (data) => console.log(data)
 
   // https://stackoverflow.com/questions/71324797/react-typescript-what-does-dispatchsetstateactionboolean-stand-for
   // Pretty good, talks about hovering over the state to see the <Dispatch> stuff 
@@ -105,19 +108,19 @@ export default function PlayerSignUpForm() {
     }
   });
 
-  async function onSubmit(event: FormEvent<HTMLFormElement>) {
-      event.preventDefault()
+  // async function onSubmit(event: FormEvent<HTMLFormElement>) {
+  //     event.preventDefault()
     
-      const formData = new FormData(event.currentTarget)
-      const response = await fetch('/api/submit', {
-        method: 'POST',
-        body: formData,
-      })
+  //     const formData = new FormData(event.currentTarget)
+  //     const response = await fetch('/api/submit', {
+  //       method: 'POST',
+  //       body: formData,
+  //     })
     
-      // Handle response if necessary
-      const data = await response.json()
-      // ...
-    }
+  //     // Handle response if necessary
+  //     const data = await response.json()
+  //     // ...
+  //   }
 
 
     // Some things to consider, if linking a parents mobile and email, should we also take their name down?
@@ -157,12 +160,25 @@ export default function PlayerSignUpForm() {
     // https://react-hook-form.com/get-started#ReactWebVideoTutorial
     // https://react-hook-form.com/advanced-usage 
 
-    
+
 
     console.log( " Player signing up : ", userPlayerInfo)
 
+
+
+    // Everything should rest a the top level, 
+    // The idea here is to use form provider to have the form context and props available in the children components
+
+    // https://react-hook-form.com/docs/formprovider
+
+
+
+
+
     return (
-    <form name="wf-form-player-signup" method="post">
+    <FormProvider {...methods}>
+      {/* pass all methods into the context */}
+      <form onSubmit={methods.handleSubmit(onSubmit)}>
       <BasicSignUpInfo 
         userPlayerInfo={userPlayerInfo}
         setUserPlayerInfo={setUserPlayerInfo} 
@@ -182,6 +198,7 @@ export default function PlayerSignUpForm() {
             </span>
         </label>
         <input type="submit" value="Join SportPal" className="inline-block w-full cursor-pointer items-center bg-black px-6 py-3 text-center font-semibold text-white" />
-    </form>
+        </form>
+    </FormProvider>
     )
   }
