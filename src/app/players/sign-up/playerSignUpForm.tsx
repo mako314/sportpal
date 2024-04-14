@@ -149,18 +149,15 @@ export default function PlayerSignUpForm() {
     // Will include all of the above.
 
     // Way to authenticate user will be done after / authenticate / cache/ cookies? 
-
-    // 
-
+ 
     // https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/basic_type_example/
 
 
     // https://www.reddit.com/r/nextjs/comments/1ah721o/what_is_everyones_favorite_tool_for_creating/
-
-
     // https://react-hook-form.com/get-started#ReactWebVideoTutorial
-
     // https://react-hook-form.com/advanced-usage 
+
+    
 
     console.log( " Player signing up : ", userPlayerInfo)
 
