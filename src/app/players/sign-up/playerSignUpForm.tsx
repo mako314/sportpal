@@ -5,6 +5,7 @@ import { useState } from 'react'
 
 import BasicSignUpInfo from './basicSignUp';
 import AddressForm from './addressForm'
+import SportSignUp from './sports/sportInfo';
 
 // https://nextjs.org/docs/pages/building-your-application/data-fetching/forms-and-mutations
 // https://react.dev/learn/choosing-the-state-structure#principles-for-structuring-state
@@ -141,7 +142,7 @@ export default function PlayerSignUpForm() {
     // Graduation date, 
     // College Major?
     // Middle - College ? 
-    
+
     // Option to include their accolades
 
     // Need to have state object to be sent in, with types declared
@@ -152,6 +153,10 @@ export default function PlayerSignUpForm() {
     // 
 
     // https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/basic_type_example/
+
+
+    // https://www.reddit.com/r/nextjs/comments/1ah721o/what_is_everyones_favorite_tool_for_creating/
+
 
     console.log( " Player signing up : ", userPlayerInfo)
 
@@ -166,6 +171,8 @@ export default function PlayerSignUpForm() {
       userPlayerInfo={userPlayerInfo}
       setUserPlayerInfo={setUserPlayerInfo} 
       />
+
+      {/* <SportSignUp/> */}
 
 
         <label className="mb-6 flex items-center justify-start pb-12 pl-5 font-medium md:mb-10 lg:mb-1">
