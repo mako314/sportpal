@@ -69,7 +69,7 @@ export interface UserPlayerInformation  {
 export default function PlayerSignUpForm() {
   const methods = useForm()
 
-  const onSubmit = (data) => console.log(data)
+  const onSubmit = (data) => console.log("LOOK FOR THIS DATA:", data)
 
   // https://stackoverflow.com/questions/71324797/react-typescript-what-does-dispatchsetstateactionboolean-stand-for
   // Pretty good, talks about hovering over the state to see the <Dispatch> stuff 
@@ -197,7 +197,9 @@ export default function PlayerSignUpForm() {
             <span className="ml-4 inline-block cursor-pointer text-sm">I agree with the <a href="#" className="font-bold text-[#0b0b1f]">Terms &amp; Conditions</a>
             </span>
         </label>
+
         <input type="submit" value="Join SportPal" className="inline-block w-full cursor-pointer items-center bg-black px-6 py-3 text-center font-semibold text-white" />
+
         </form>
     </FormProvider>
     )
