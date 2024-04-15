@@ -68,12 +68,14 @@ export interface UserPlayerInformation  {
 
 
 export default function PlayerSignUpForm() {
+  const [previousStep, setPreviousStep] = useState(0)
+  const [currentStep, setCurrentStep] = useState(0)
+  const delta = currentStep - previousStep
   const methods = useForm()
-
   const onSubmit = (data) => {
 
-    // On the bright side, I managed to get the data and set everything up today, now it will just be adding it to the state object.
-    console.log("LOOK FOR THIS DATA:", data)
+  // On the bright side, I managed to get the data and set everything up today, now it will just be adding it to the state object.
+  console.log("LOOK FOR THIS DATA:", data)
   //   setUserPlayerInfo(
   //     {...userPlayerInfo,
   //     player_basic_info: {
@@ -136,6 +138,21 @@ export default function PlayerSignUpForm() {
   //   }
 
 
+  const steps = [
+    {
+      id: 'Step 1',
+      name: 'Personal Information',
+      fields: ['firstName', 'lastName', 'email']
+    },
+    {
+      id: 'Step 2',
+      name: 'Address',
+      fields: ['country', 'state', 'city', 'street', 'zip']
+    },
+    { id: 'Step 3', name: 'Complete' }
+  ]
+
+
     // Some things to consider, if linking a parents mobile and email, should we also take their name down?
 
     // Thinking of breaking this down into 3 parts?
@@ -189,7 +206,8 @@ export default function PlayerSignUpForm() {
 
     // First choice presented for a user : 
     // Are you 18+ / Parent sign up
-    
+    // coaches / other portion too 
+
     //  Present Info
     // basic / parent / etc
     // address
@@ -207,6 +225,33 @@ export default function PlayerSignUpForm() {
 
     return (
     <FormProvider {...methods}>
+      <div> 
+       {/* Sections provide pre-selection, this page will allow flow of sign up */}
+       <section className='relative z-10 flex flex-col justify-center p-8 bg-white shadow-md'>
+  {/* Steps */}
+  <nav aria-label='Progress'>
+    <ol className='flex justify-center space-x-4 md:space-x-6'>
+      {steps.map((step, index) => (
+        <li key={step.name} className='flex-1'>
+          <div className={`group flex w-full flex-col items-center transition-colors duration-200 ease-in-out ${
+            currentStep > index ? 'border-b-4 border-sky-600' : currentStep === index ? 'border-b-4 border-sky-600' : 'border-b-4 border-gray-200'
+          }`}>
+            <span className={`text-sm font-medium ${
+              currentStep >= index ? 'text-sky-600' : 'text-gray-500'
+            } transition-colors duration-200 ease-in-out`}>
+              {step.id}
+            </span>
+            <span className='text-sm font-medium'>
+              {step.name}
+            </span>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </nav>
+</section>
+
+
       {/* pass all methods into the context */}
       <form onSubmit={methods.handleSubmit(onSubmit)}>
       <BasicSignUpInfo 
@@ -231,6 +276,8 @@ export default function PlayerSignUpForm() {
         <input type="submit" value="Join SportPal" className="inline-block w-full cursor-pointer items-center bg-black px-6 py-3 text-center font-semibold text-white" />
 
         </form>
+        </div>
     </FormProvider>
+    
     )
   }
