@@ -3,8 +3,13 @@
 import { FormEvent } from 'react'
 import { useState } from 'react'
 
+
+import { useForm, FormProvider, useFormContext } from "react-hook-form"
+
 import BasicSignUpInfo from './basicSignUp';
 import AddressForm from './addressForm'
+import SportSignUp from './sports/sportInfo';
+import { Single_Day } from 'next/font/google';
 
 // https://nextjs.org/docs/pages/building-your-application/data-fetching/forms-and-mutations
 // https://react.dev/learn/choosing-the-state-structure#principles-for-structuring-state
@@ -16,9 +21,6 @@ import AddressForm from './addressForm'
 
 
 // Ideally, we also style these forms a bit more.
-
-
-
 // This should join everything together, 
 // Player ( User ) consists of:
 // Part 1 - Basic Information
@@ -66,6 +68,21 @@ export interface UserPlayerInformation  {
 
 
 export default function PlayerSignUpForm() {
+  const methods = useForm()
+
+  const onSubmit = (data) => {
+
+    // On the bright side, I managed to get the data and set everything up today, now it will just be adding it to the state object.
+    console.log("LOOK FOR THIS DATA:", data)
+  //   setUserPlayerInfo(
+  //     {...userPlayerInfo,
+  //     player_basic_info: {
+  //             ...userPlayerInfo.player_basic_info,
+  //             ...updates,
+  //     },
+  // })
+  
+  }
 
   // https://stackoverflow.com/questions/71324797/react-typescript-what-does-dispatchsetstateactionboolean-stand-for
   // Pretty good, talks about hovering over the state to see the <Dispatch> stuff 
@@ -104,19 +121,19 @@ export default function PlayerSignUpForm() {
     }
   });
 
-  async function onSubmit(event: FormEvent<HTMLFormElement>) {
-      event.preventDefault()
+  // async function onSubmit(event: FormEvent<HTMLFormElement>) {
+  //     event.preventDefault()
     
-      const formData = new FormData(event.currentTarget)
-      const response = await fetch('/api/submit', {
-        method: 'POST',
-        body: formData,
-      })
+  //     const formData = new FormData(event.currentTarget)
+  //     const response = await fetch('/api/submit', {
+  //       method: 'POST',
+  //       body: formData,
+  //     })
     
-      // Handle response if necessary
-      const data = await response.json()
-      // ...
-    }
+  //     // Handle response if necessary
+  //     const data = await response.json()
+  //     // ...
+  //   }
 
 
     // Some things to consider, if linking a parents mobile and email, should we also take their name down?
@@ -141,22 +158,54 @@ export default function PlayerSignUpForm() {
     // Graduation date, 
     // College Major?
     // Middle - College ? 
-    
+
     // Option to include their accolades
 
     // Need to have state object to be sent in, with types declared
     // Will include all of the above.
 
     // Way to authenticate user will be done after / authenticate / cache/ cookies? 
-
-    // 
-
+ 
     // https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/basic_type_example/
+
+
+    // https://www.reddit.com/r/nextjs/comments/1ah721o/what_is_everyones_favorite_tool_for_creating/
+    // https://react-hook-form.com/get-started#ReactWebVideoTutorial
+    // https://react-hook-form.com/advanced-usage 
+
+
 
     console.log( " Player signing up : ", userPlayerInfo)
 
+
+
+    // Everything should rest a the top level, 
+    // The idea here is to use form provider to have the form context and props available in the children components
+
+    // https://react-hook-form.com/docs/formprovider
+
+
+
+
+    //  Present Info
+    // basic / parent / etc
+    // address
+      // sports 
+      // soccer, etc, 
+      // teams
+      // sort by area and such?
+      // Position -- Extra details?
+    
+    // Current school standing / etc 
+
+
+
+
+
     return (
-    <form name="wf-form-player-signup" method="post">
+    <FormProvider {...methods}>
+      {/* pass all methods into the context */}
+      <form onSubmit={methods.handleSubmit(onSubmit)}>
       <BasicSignUpInfo 
         userPlayerInfo={userPlayerInfo}
         setUserPlayerInfo={setUserPlayerInfo} 
@@ -167,13 +216,18 @@ export default function PlayerSignUpForm() {
       setUserPlayerInfo={setUserPlayerInfo} 
       />
 
+      {/* <SportSignUp/> */}
+
 
         <label className="mb-6 flex items-center justify-start pb-12 pl-5 font-medium md:mb-10 lg:mb-1">
             <input type="checkbox" name="checkbox" className="float-left -ml-[20px] mt-1" />
             <span className="ml-4 inline-block cursor-pointer text-sm">I agree with the <a href="#" className="font-bold text-[#0b0b1f]">Terms &amp; Conditions</a>
             </span>
         </label>
+
         <input type="submit" value="Join SportPal" className="inline-block w-full cursor-pointer items-center bg-black px-6 py-3 text-center font-semibold text-white" />
-    </form>
+
+        </form>
+    </FormProvider>
     )
   }
