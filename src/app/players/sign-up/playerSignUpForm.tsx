@@ -187,6 +187,9 @@ export default function PlayerSignUpForm() {
 
 
 
+    // First choice presented for a user : 
+    // Are you 18+ / Parent sign up
+    
     //  Present Info
     // basic / parent / etc
     // address
