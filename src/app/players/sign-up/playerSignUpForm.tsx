@@ -72,6 +72,8 @@ export default function PlayerSignUpForm() {
   const [currentStep, setCurrentStep] = useState(0)
   const delta = currentStep - previousStep
   const methods = useForm()
+
+  
   const onSubmit = (data) => {
 
   // On the bright side, I managed to get the data and set everything up today, now it will just be adding it to the state object.
@@ -219,6 +221,37 @@ export default function PlayerSignUpForm() {
     
     // Current school standing / etc 
 
+    const next = async () => {
+      const fields = steps[currentStep].fields
+      const output = await trigger(fields as FieldName[], { shouldFocus: true })
+  
+      if (!output) return
+  
+      if (currentStep < steps.length - 1) {
+        if (currentStep === steps.length - 2) {
+          await handleSubmit(processForm)()
+        }
+        setPreviousStep(currentStep)
+        setCurrentStep(step => step + 1)
+      }
+    }
+  
+    const prev = () => {
+      if (currentStep > 0) {
+        setPreviousStep(currentStep)
+        setCurrentStep(step => step - 1)
+      }
+    }
+
+    
+    // const goToPreviousPage = () => {
+    //   setSelectedIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : projectDisplayComponents.length - 1));
+    // }
+    
+    //   const goToNextPage = () => {
+    //     setSelectedIndex((prevIndex) => (prevIndex + 1) % projectDisplayComponents.length);
+    // }
+
 
 
 
@@ -254,15 +287,32 @@ export default function PlayerSignUpForm() {
 
       {/* pass all methods into the context */}
       <form onSubmit={methods.handleSubmit(onSubmit)}>
-      <BasicSignUpInfo 
+
+
+
+      {currentStep === 0 && (
+          // <motion.div
+          //   initial={{ x: delta >= 0 ? '50%' : '-50%', opacity: 0 }}
+          //   animate={{ x: 0, opacity: 1 }}
+          //   transition={{ duration: 0.3, ease: 'easeInOut' }}
+          // >
+
+          // </motion.div>
+          <div>
+        <BasicSignUpInfo 
         userPlayerInfo={userPlayerInfo}
         setUserPlayerInfo={setUserPlayerInfo} 
       />
+          </div>
+        )}
 
-      <AddressForm
-      userPlayerInfo={userPlayerInfo}
-      setUserPlayerInfo={setUserPlayerInfo} 
-      />
+      
+    {currentStep === 1 && (
+          <AddressForm
+          userPlayerInfo={userPlayerInfo}
+          setUserPlayerInfo={setUserPlayerInfo} 
+          />
+        )}
 
       {/* <SportSignUp/> */}
 
@@ -275,7 +325,66 @@ export default function PlayerSignUpForm() {
 
         <input type="submit" value="Join SportPal" className="inline-block w-full cursor-pointer items-center bg-black px-6 py-3 text-center font-semibold text-white" />
 
-        </form>
+
+         {/* Navigation */}
+      <div className='mt-8 pt-5'>
+
+        <div className='flex justify-between'>
+          <button
+            type='button'
+            onClick={prev}
+            disabled={currentStep === 0}
+            className='rounded bg-white px-2 py-1 text-sm font-semibold text-sky-900 shadow-sm ring-1 ring-inset ring-sky-300 hover:bg-sky-50 disabled:cursor-not-allowed disabled:opacity-50'
+          >
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              fill='none'
+              viewBox='0 0 24 24'
+              strokeWidth='1.5'
+              stroke='currentColor'
+              className='h-6 w-6'
+            >
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                d='M15.75 19.5L8.25 12l7.5-7.5'
+              />
+            </svg>
+          </button>
+
+          {/* Right arrow button 
+          
+          Can add a order around the button with an arrow > but im just going to skip all styling for now lol
+
+          */}
+          <button
+            type='button'
+            onClick={next}
+            disabled={currentStep === steps.length - 1}
+            className='rounded bg-white px-2 py-1 text-sm font-semibold text-sky-900 shadow-sm ring-1 ring-inset ring-sky-300 hover:bg-sky-50 disabled:cursor-not-allowed disabled:opacity-50'
+          >
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              fill='none'
+              viewBox='0 0 24 24'
+              strokeWidth='1.5'
+              stroke='black'
+              className='h-6 w-6'
+            >
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                d='M8.25 4.5l7.5 7.5-7.5 7.5'
+              />
+            </svg>
+          </button>
+
+        </div>
+      </div>
+
+      </form>
+
+        
         </div>
     </FormProvider>
     
