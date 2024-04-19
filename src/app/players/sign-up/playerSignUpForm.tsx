@@ -253,7 +253,11 @@ export default function PlayerSignUpForm() {
     // }
 
 
+    // Steps included, tomorrow will connect route and button!
 
+    // Gray working on having the designs come in before I continue heavily css.
+
+    // Currently working on the excaldraw also to properly set everything up, 
 
 
     return (
@@ -261,28 +265,28 @@ export default function PlayerSignUpForm() {
       <div> 
        {/* Sections provide pre-selection, this page will allow flow of sign up */}
        <section className='relative z-10 flex flex-col justify-center p-8 bg-white shadow-md'>
-  {/* Steps */}
-  <nav aria-label='Progress'>
-    <ol className='flex justify-center space-x-4 md:space-x-6'>
-      {steps.map((step, index) => (
-        <li key={step.name} className='flex-1'>
-          <div className={`group flex w-full flex-col items-center transition-colors duration-200 ease-in-out ${
-            currentStep > index ? 'border-b-4 border-sky-600' : currentStep === index ? 'border-b-4 border-sky-600' : 'border-b-4 border-gray-200'
-          }`}>
-            <span className={`text-sm font-medium ${
-              currentStep >= index ? 'text-sky-600' : 'text-gray-500'
-            } transition-colors duration-200 ease-in-out`}>
-              {step.id}
-            </span>
-            <span className='text-sm font-medium'>
-              {step.name}
-            </span>
-          </div>
-        </li>
-      ))}
-    </ol>
-  </nav>
-</section>
+        {/* Steps */}
+        <nav aria-label='Progress'>
+          <ol className='flex justify-center space-x-4 md:space-x-6'>
+            {steps.map((step, index) => (
+              <li key={step.name} className='flex-1'>
+                <div className={`group flex w-full flex-col items-center transition-colors duration-200 ease-in-out ${
+                  currentStep > index ? 'border-b-4 border-sky-600' : currentStep === index ? 'border-b-4 border-sky-600' : 'border-b-4 border-gray-200'
+                }`}>
+                  <span className={`text-sm font-medium ${
+                    currentStep >= index ? 'text-sky-600' : 'text-gray-500'
+                  } transition-colors duration-200 ease-in-out`}>
+                    {step.id}
+                  </span>
+                  <span className='text-sm font-medium'>
+                    {step.name}
+                  </span>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </nav>
+      </section>
 
 
       {/* pass all methods into the context */}
