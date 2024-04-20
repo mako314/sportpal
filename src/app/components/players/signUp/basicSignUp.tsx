@@ -1,5 +1,5 @@
 import React from 'react';
-import { UserPlayerInformation } from '../../components/players/signUp/playerSignUpForm'
+import { UserPlayerInformation } from './playerSignUpForm'
 
 import { FormEvent } from 'react'
 
