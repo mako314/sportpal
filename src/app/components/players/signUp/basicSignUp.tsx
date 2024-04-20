@@ -6,7 +6,8 @@ import { FormEvent } from 'react'
 import { useFormContext } from 'react-hook-form';
 
 // https://nextjs.org/docs/pages/building-your-application/data-fetching/forms-and-mutations
-
+// https://www.youtube.com/watch?v=lW_0InDuejU&t=864s
+// https://github.com/HamedBahram/next-multistep-form/tree/main
 
 interface BasicSignUpInfoProps {
     userPlayerInfo: UserPlayerInformation;
@@ -40,8 +41,6 @@ const BasicSignUpInfo: React.FC<BasicSignUpInfoProps> = ({ setUserPlayerInfo, us
 }
 
 // https://www.reddit.com/r/reactjs/comments/16xijqi/is_reacthookform_ideal_for_a_form_with_over_a/
-
-
 // https://react-hook-form.com/docs/useform/register
 
 
