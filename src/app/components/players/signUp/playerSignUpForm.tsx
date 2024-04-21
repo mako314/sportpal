@@ -3,8 +3,11 @@
 import { FormEvent } from 'react'
 import { useState } from 'react'
 
+import { BasicFormDataSchema } from '@/app/schemas/userSchema';
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
 
-import { useForm, FormProvider, useFormContext } from "react-hook-form"
+import { useForm, FormProvider, useFormContext, SubmitHandler } from "react-hook-form"
 
 import BasicSignUpInfo from './basicSignUp';
 import AddressForm from './addressForm'
@@ -65,6 +68,8 @@ export interface UserPlayerInformation  {
   player_school_info: SchoolInformation;
   player_sport_info: SportInformation;
 }
+
+type Inputs = z.infer<typeof BasicFormDataSchema>
 
 
 export default function PlayerSignUpForm() {
@@ -196,6 +201,8 @@ export default function PlayerSignUpForm() {
 
     console.log( " Player signing up : ", userPlayerInfo)
 
+    //https://www.typescriptlang.org/docs/handbook/2/typeof-types.html#handbook-content
+
 
 
     // Everything should rest a the top level, 
@@ -219,7 +226,25 @@ export default function PlayerSignUpForm() {
       // sort by area and such?
       // Position -- Extra details?
     
-    // Current school standing / etc 
+    // Current school standing / etc
+    
+    const {
+      register,
+      handleSubmit,
+      watch,
+      reset,
+      trigger,
+      formState: { errors }
+    } = useForm<Inputs>({
+      resolver: zodResolver(FormDataSchema)
+    })
+  
+    const processForm: SubmitHandler<Inputs> = data => {
+      console.log(data)
+      reset()
+    }
+  
+    type FieldName = keyof Inputs
 
     const next = async () => {
       const fields = steps[currentStep].fields

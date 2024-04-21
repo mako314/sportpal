@@ -1,5 +1,5 @@
 // import SportsPal from '../../resources/images/SportsPal.svg';
-import { SportsPalSVG } from "@/pages/resources/images"
+import { SportsPalSVG } from "@/app/resources/images"
 
 export default function NavBar() {
 

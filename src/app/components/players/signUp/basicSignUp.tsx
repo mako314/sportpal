@@ -42,7 +42,7 @@ const BasicSignUpInfo: React.FC<BasicSignUpInfoProps> = ({ setUserPlayerInfo, us
 
 // https://www.reddit.com/r/reactjs/comments/16xijqi/is_reacthookform_ideal_for_a_form_with_over_a/
 // https://react-hook-form.com/docs/useform/register
-
+// https://www.freecodecamp.org/news/react-form-validation-zod-react-hook-form/
 
 
     return (
@@ -140,9 +140,19 @@ const BasicSignUpInfo: React.FC<BasicSignUpInfoProps> = ({ setUserPlayerInfo, us
             <input {...register("player_password")} 
             className="mb-4 block h-9 w-full rounded-md border border-solid border-black px-3 py-6 pl-14 text-sm text-[#333333]" 
             placeholder="Password"
-            type="text"
+            type="password"
             />
         </div>
+
+        <div className="sm:col-span-2">
+            <label htmlFor="player_confirm_password" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Password</label>
+            <input {...register("player_confirm_password")} 
+            className="mb-4 block h-9 w-full rounded-md border border-solid border-black px-3 py-6 pl-14 text-sm text-[#333333]" 
+            placeholder="Confirm Password"
+            type="password"
+            />
+        </div>
+
         </div>
     )
   }
