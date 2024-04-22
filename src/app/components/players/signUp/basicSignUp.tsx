@@ -16,10 +16,10 @@ interface BasicSignUpInfoProps {
 
 
 
-const BasicSignUpInfo: React.FC<BasicSignUpInfoProps> = ({ setUserPlayerInfo, userPlayerInfo }) => {
+const BasicSignUpInfo: React.FC<BasicSignUpInfoProps> = ({ setUserPlayerInfo, userPlayerInfo, basicErrors }) => {
 
-    const { register, handleSubmit, formState: { errors } } = useFormContext();
-    console.log("The Errors:",errors);
+    const { register, handleSubmit } = useFormContext();
+    console.log("errors basic sign up:", basicErrors);
 
     // Part 1 - Basic Information
     // Name, Email, Parents Info. DOB, email, phone, password

@@ -5,8 +5,8 @@ import { z } from 'zod'
 // https://github.com/colinhacks/zod/discussions/938
 
 export const UserFormDataSchema = z.object({
-player_first_name: z.string().min(1, 'First name is required'),
-player_last_name: z.string().min(1, 'Last name is required'),
+player_first_name: z.string().min(1, { message: 'Required' }),
+player_last_name: z.string().min(1, { message: 'Required' }),
 player_phone: z.string().min(10, 'Phone Required'),
 player_email: z.string().email({ message: "Email address required" }),
 player_password: z.string().min(1, 'Password is required'),

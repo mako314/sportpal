@@ -5,6 +5,8 @@ import { useState } from 'react'
 
 import { UserFormDataSchema } from '@/app/schemas/userSchema';
 import { z } from 'zod'
+
+// https://react-hook-form.com/docs/useform#resolver
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import { useForm, FormProvider, useFormContext, SubmitHandler } from "react-hook-form"
@@ -150,7 +152,7 @@ export default function PlayerSignUpForm() {
     {
       id: 'Step 1',
       name: 'Personal Information',
-      fields: ['firstName', 'lastName', 'email']
+      fields: ['player_first_name', 'player_last_name', 'player_phone']
     },
     {
       id: 'Step 2',
@@ -239,9 +241,10 @@ export default function PlayerSignUpForm() {
     } = useForm<Inputs>({
       resolver: zodResolver(UserFormDataSchema)
     })
-  
+    console.log("The Errors:",errors);
+
     const processForm: SubmitHandler<Inputs> = data => {
-      console.log(data)
+      console.log("CHECK THIS DATA:", data)
       reset()
     }
   
@@ -317,7 +320,7 @@ export default function PlayerSignUpForm() {
 
 
       {/* pass all methods into the context */}
-      <form onSubmit={methods.handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(processForm)}>
       {currentStep === 0 && (
           // <motion.div
           //   initial={{ x: delta >= 0 ? '50%' : '-50%', opacity: 0 }}
@@ -330,7 +333,7 @@ export default function PlayerSignUpForm() {
         <BasicSignUpInfo 
         userPlayerInfo={userPlayerInfo}
         setUserPlayerInfo={setUserPlayerInfo} 
-        errors={errors}
+        basicErrors={errors}
       />
           </div>
         )}
