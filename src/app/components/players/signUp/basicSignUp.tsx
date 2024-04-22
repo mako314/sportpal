@@ -56,6 +56,13 @@ const BasicSignUpInfo: React.FC<BasicSignUpInfoProps> = ({ setUserPlayerInfo, us
             placeholder="First Name" 
             type="text"
             />
+
+            {basicErrors.player_first_name?.message && (
+            <p className='mt-2 text-sm text-red-400'>
+            {basicErrors.player_first_name.message}
+            </p>
+            )}
+
         </div>
 
         <div className="sm:col-span-2">
@@ -65,6 +72,13 @@ const BasicSignUpInfo: React.FC<BasicSignUpInfoProps> = ({ setUserPlayerInfo, us
             placeholder="Last Name"
             type="text"
             />
+            {basicErrors.player_last_name?.message && (
+            <p className='mt-2 text-sm text-red-400'>
+            {basicErrors.player_last_name.message}
+            </p>
+            )}
+
+
         </div>
 
         <div className="sm:col-span-2">
@@ -73,6 +87,13 @@ const BasicSignUpInfo: React.FC<BasicSignUpInfoProps> = ({ setUserPlayerInfo, us
             className="mb-4 block h-9 w-full rounded-md border border-solid border-black px-3 py-6 pl-14 text-sm text-[#333333]"  
             type="date"
             />
+
+            {basicErrors.player_dob?.message && (
+            <p className='mt-2 text-sm text-red-400'>
+            {basicErrors.player_dob.message}
+            </p>
+            )}
+
         </div>
 
         <div className="sm:col-span-2">
@@ -82,6 +103,13 @@ const BasicSignUpInfo: React.FC<BasicSignUpInfoProps> = ({ setUserPlayerInfo, us
             placeholder="Email Address"
             type="text"
             />
+
+            {basicErrors.player_email?.message && (
+            <p className='mt-2 text-sm text-red-400'>
+            {basicErrors.player_email.message}
+            </p>
+            )}
+
         </div>
 
         <div className="sm:col-span-2">
@@ -91,6 +119,13 @@ const BasicSignUpInfo: React.FC<BasicSignUpInfoProps> = ({ setUserPlayerInfo, us
             placeholder="Mobile Number"
             type="text"
             />
+
+            {basicErrors.player_phone?.message && (
+            <p className='mt-2 text-sm text-red-400'>
+            {basicErrors.player_phone.message}
+            </p>
+            )}
+
         </div>
 
         {/* 
@@ -106,6 +141,13 @@ const BasicSignUpInfo: React.FC<BasicSignUpInfoProps> = ({ setUserPlayerInfo, us
             placeholder="Parent First Name"
             type="text"
             />
+
+            {basicErrors.parent_first_name?.message && (
+            <p className='mt-2 text-sm text-red-400'>
+            {basicErrors.parent_first_name.message}
+            </p>
+            )}
+
         </div>
 
         <div className="sm:col-span-2">
@@ -115,6 +157,12 @@ const BasicSignUpInfo: React.FC<BasicSignUpInfoProps> = ({ setUserPlayerInfo, us
             placeholder="Parent Last Name"
             type="text"
             />
+
+            {basicErrors.parent_last_name?.message && (
+            <p className='mt-2 text-sm text-red-400'>
+            {basicErrors.parent_last_name.message}
+            </p>
+            )}
         </div>
 
         <div className="sm:col-span-2">
@@ -124,6 +172,13 @@ const BasicSignUpInfo: React.FC<BasicSignUpInfoProps> = ({ setUserPlayerInfo, us
             placeholder="Parents Email"
             type="text"
             />
+
+            {basicErrors.parent_email?.message && (
+            <p className='mt-2 text-sm text-red-400'>
+            {basicErrors.parent_email.message}
+            </p>
+            )}
+
         </div>
 
         <div className="sm:col-span-2">
@@ -133,6 +188,12 @@ const BasicSignUpInfo: React.FC<BasicSignUpInfoProps> = ({ setUserPlayerInfo, us
             placeholder="Parents Mobile Number"
             type="text"
             />
+
+            {basicErrors.parent_phone?.message && (
+            <p className='mt-2 text-sm text-red-400'>
+            {basicErrors.parent_phone.message}
+            </p>
+            )}
         </div>
 
         <div className="sm:col-span-2">
@@ -142,6 +203,13 @@ const BasicSignUpInfo: React.FC<BasicSignUpInfoProps> = ({ setUserPlayerInfo, us
             placeholder="Password"
             type="password"
             />
+
+            {basicErrors.player_password?.message && (
+            <p className='mt-2 text-sm text-red-400'>
+            {basicErrors.player_password.message}
+            </p>
+            )}
+
         </div>
 
         <div className="sm:col-span-2">
@@ -151,6 +219,9 @@ const BasicSignUpInfo: React.FC<BasicSignUpInfoProps> = ({ setUserPlayerInfo, us
             placeholder="Confirm Password"
             type="password"
             />
+
+
+            
         </div>
 
         </div>

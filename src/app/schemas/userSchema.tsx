@@ -4,10 +4,12 @@ import { z } from 'zod'
 // Should look into the date time https://zod.dev/?id=datetimes for this DOB stuff. Not sure if it'll be necessary though.
 // https://github.com/colinhacks/zod/discussions/938
 
+// https://stackoverflow.com/questions/76672351/error-messages-from-react-hook-form-with-zod
+
 export const UserFormDataSchema = z.object({
-player_first_name: z.string().min(1, { message: 'Required' }),
-player_last_name: z.string().min(1, { message: 'Required' }),
-player_phone: z.string().min(10, 'Phone Required'),
+player_first_name: z.string({ required_error: 'Passoword is required' }).min(12, { message: "Must be 12 or more characters long" }),
+player_last_name: z.string().min(1, { message: "Must be 5 or more characters long" }),
+player_phone: z.string().min(10, {message: "please work god"}),
 player_email: z.string().email({ message: "Email address required" }),
 player_password: z.string().min(1, 'Password is required'),
 player_dob: z.string().min(1, 'Date of Birth is required'),
