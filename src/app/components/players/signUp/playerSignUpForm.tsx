@@ -3,7 +3,7 @@
 import { FormEvent } from 'react'
 import { useState } from 'react'
 
-import { BasicFormDataSchema } from '@/app/schemas/userSchema';
+import { UserFormDataSchema } from '@/app/schemas/userSchema';
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 
@@ -47,6 +47,7 @@ type BasicInformation = {
 };
 
 // Part 2 - Sports
+// Need to include sport played silly
 type SportInformation = {
   organization_name: string;
   position_one: string;
@@ -69,7 +70,7 @@ export interface UserPlayerInformation  {
   player_sport_info: SportInformation;
 }
 
-type Inputs = z.infer<typeof BasicFormDataSchema>
+type Inputs = z.infer<typeof UserFormDataSchema>
 
 
 export default function PlayerSignUpForm() {
