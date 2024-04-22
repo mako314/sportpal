@@ -237,7 +237,7 @@ export default function PlayerSignUpForm() {
       trigger,
       formState: { errors }
     } = useForm<Inputs>({
-      resolver: zodResolver(FormDataSchema)
+      resolver: zodResolver(UserFormDataSchema)
     })
   
     const processForm: SubmitHandler<Inputs> = data => {
@@ -291,6 +291,7 @@ export default function PlayerSignUpForm() {
       <div> 
        {/* Sections provide pre-selection, this page will allow flow of sign up */}
        <section className='relative z-10 flex flex-col justify-center p-8 bg-white shadow-md'>
+
         {/* Steps */}
         <nav aria-label='Progress'>
           <ol className='flex justify-center space-x-4 md:space-x-6'>
@@ -317,9 +318,6 @@ export default function PlayerSignUpForm() {
 
       {/* pass all methods into the context */}
       <form onSubmit={methods.handleSubmit(onSubmit)}>
-
-
-
       {currentStep === 0 && (
           // <motion.div
           //   initial={{ x: delta >= 0 ? '50%' : '-50%', opacity: 0 }}
@@ -332,6 +330,7 @@ export default function PlayerSignUpForm() {
         <BasicSignUpInfo 
         userPlayerInfo={userPlayerInfo}
         setUserPlayerInfo={setUserPlayerInfo} 
+        errors={errors}
       />
           </div>
         )}
