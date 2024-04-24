@@ -51,7 +51,8 @@ const BasicSignUpInfo: React.FC<BasicSignUpInfoProps> = ({ setUserPlayerInfo, us
             {/* React Hook Forms */}
         <div className="sm:col-span-2">
             <label htmlFor="player_first_name" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">First Name</label>
-            <input {...register("player_first_name")} 
+            <input 
+            {...register("player_first_name")} 
             className="mb-4 block h-9 w-full rounded-md border border-solid border-black px-3 py-6 pl-14 text-sm text-[#333333]" 
             placeholder="First Name" 
             type="text"
@@ -98,7 +99,8 @@ const BasicSignUpInfo: React.FC<BasicSignUpInfoProps> = ({ setUserPlayerInfo, us
 
         <div className="sm:col-span-2">
             <label htmlFor="player_email" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Email Address</label>
-            <input {...register("player_email")} 
+            <input 
+            {...register("player_email")} 
             className="mb-4 block h-9 w-full rounded-md border border-solid border-black px-3 py-6 pl-14 text-sm text-[#333333]" 
             placeholder="Email Address"
             type="text"

@@ -82,19 +82,19 @@ export default function PlayerSignUpForm() {
   const methods = useForm()
 
   
-  const onSubmit = (data) => {
+  // const onSubmit = (data) => {
 
-  // On the bright side, I managed to get the data and set everything up today, now it will just be adding it to the state object.
-  console.log("LOOK FOR THIS DATA:", data)
-  //   setUserPlayerInfo(
-  //     {...userPlayerInfo,
-  //     player_basic_info: {
-  //             ...userPlayerInfo.player_basic_info,
-  //             ...updates,
-  //     },
-  // })
+  // // On the bright side, I managed to get the data and set everything up today, now it will just be adding it to the state object.
+  // console.log("LOOK FOR THIS DATA:", data)
+  // //   setUserPlayerInfo(
+  // //     {...userPlayerInfo,
+  // //     player_basic_info: {
+  // //             ...userPlayerInfo.player_basic_info,
+  // //             ...updates,
+  // //     },
+  // // })
   
-  }
+  // }
 
   // https://stackoverflow.com/questions/71324797/react-typescript-what-does-dispatchsetstateactionboolean-stand-for
   // Pretty good, talks about hovering over the state to see the <Dispatch> stuff 
@@ -243,8 +243,9 @@ export default function PlayerSignUpForm() {
     })
     console.log("The Errors:",errors);
 
-    const processForm: SubmitHandler<Inputs> = data => {
-      console.log("CHECK THIS DATA:", data)
+    const processForm: SubmitHandler<Inputs> = (data, event) => {
+      console.log("Form Errors:", errors)
+      console.log("Form Data:", data)
       reset()
     }
   
@@ -320,7 +321,7 @@ export default function PlayerSignUpForm() {
 
 
       {/* pass all methods into the context */}
-      <form onSubmit={handleSubmit(processForm)}>
+      <form onSubmit={methods.handleSubmit(processForm)}>
       {currentStep === 0 && (
           // <motion.div
           //   initial={{ x: delta >= 0 ? '50%' : '-50%', opacity: 0 }}
@@ -355,7 +356,7 @@ export default function PlayerSignUpForm() {
             </span>
         </label>
 
-        <input type="submit" value="Join SportPal" className="inline-block w-full cursor-pointer items-center bg-black px-6 py-3 text-center font-semibold text-white" />
+        <button type="submit" className="inline-block w-full cursor-pointer items-center bg-black px-6 py-3 text-center font-semibold text-white">Join SportPal</button>
 
 
          {/* Navigation */}
