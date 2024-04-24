@@ -4,6 +4,7 @@ import { UserPlayerInformation } from './playerSignUpForm'
 import { FormEvent } from 'react'
 
 import { useFormContext } from 'react-hook-form';
+import {Inputs } from '@/app/schemas/userSchema'
 
 // https://nextjs.org/docs/pages/building-your-application/data-fetching/forms-and-mutations
 // https://www.youtube.com/watch?v=lW_0InDuejU&t=864s
@@ -16,9 +17,10 @@ interface BasicSignUpInfoProps {
 
 
 
-const BasicSignUpInfo: React.FC<BasicSignUpInfoProps> = ({ setUserPlayerInfo, userPlayerInfo, basicErrors }) => {
+const BasicSignUpInfo: React.FC<BasicSignUpInfoProps> = ({ setUserPlayerInfo, userPlayerInfo}) => {
 
-    const { register, handleSubmit } = useFormContext();
+    const { register, formState } = useFormContext<Inputs>();
+    const basicErrors = formState.errors
     console.log("errors basic sign up:", basicErrors);
 
     // Part 1 - Basic Information
@@ -57,6 +59,7 @@ const BasicSignUpInfo: React.FC<BasicSignUpInfoProps> = ({ setUserPlayerInfo, us
             placeholder="First Name" 
             type="text"
             />
+            
 
             {basicErrors.player_first_name?.message && (
             <p className='mt-2 text-sm text-red-400'>

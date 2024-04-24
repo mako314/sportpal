@@ -7,7 +7,7 @@ import { z } from 'zod'
 // https://stackoverflow.com/questions/76672351/error-messages-from-react-hook-form-with-zod
 
 export const UserFormDataSchema = z.object({
-player_first_name: z.string({ required_error: 'player_first_name is required' }).min(5, { message: "Must be 1 or more characters long" }),
+player_first_name: z.string().min(5, "Must be 5 or more characters long"),
 // player_last_name: z.string({ required_error: 'Passoword is required' }).min(1, 'First name is required'),
 // player_phone: z.string().min(10, {message: "please work god"}),
 // player_email: z.string().email({ message: "Email address required" }),

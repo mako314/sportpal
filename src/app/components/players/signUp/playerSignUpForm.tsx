@@ -71,7 +71,7 @@ export interface UserPlayerInformation  {
   player_school_info: SchoolInformation;
   player_sport_info: SportInformation;
 }
-
+// This is where Inputs gets declared 
 type Inputs = z.infer<typeof UserFormDataSchema>
 
 
@@ -79,7 +79,27 @@ export default function PlayerSignUpForm() {
   const [previousStep, setPreviousStep] = useState(0)
   const [currentStep, setCurrentStep] = useState(0)
   const delta = currentStep - previousStep
-  const methods = useForm()
+
+  // const {
+  //   register,
+  //   handleSubmit,
+  //   watch,
+  //   reset,
+  //   trigger,
+    
+  //   formState: { errors }
+  // } = useForm<Inputs>({
+  //   resolver: zodResolver(UserFormDataSchema)
+  // })
+  // console.log("The Errors:",errors);
+  // const methods = useForm()
+
+  const methods = useForm<Inputs>({
+    resolver: zodResolver(UserFormDataSchema)
+  })
+
+  const { register, handleSubmit, watch, reset, trigger, formState: { errors } } = methods;
+
 
   
   // const onSubmit = (data) => {
@@ -231,17 +251,7 @@ export default function PlayerSignUpForm() {
     
     // Current school standing / etc
     
-    const {
-      register,
-      handleSubmit,
-      watch,
-      reset,
-      trigger,
-      formState: { errors }
-    } = useForm<Inputs>({
-      resolver: zodResolver(UserFormDataSchema)
-    })
-    console.log("The Errors:",errors);
+
 
     const processForm: SubmitHandler<Inputs> = (data, event) => {
       console.log("Form Errors:", errors)
@@ -259,7 +269,7 @@ export default function PlayerSignUpForm() {
   
       if (currentStep < steps.length - 1) {
         if (currentStep === steps.length - 2) {
-          await handleSubmit(processForm)()
+          await methods.handleSubmit(processForm)()
         }
         setPreviousStep(currentStep)
         setCurrentStep(step => step + 1)
@@ -288,6 +298,7 @@ export default function PlayerSignUpForm() {
     // Gray working on having the designs come in before I continue heavily css.
 
     // Currently working on the excaldraw also to properly set everything up, 
+    console.log(UserFormDataSchema.safeParse({ player_first_name: "J" }));
 
 
     return (
