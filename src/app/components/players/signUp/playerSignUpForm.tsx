@@ -3,8 +3,13 @@
 import { FormEvent } from 'react'
 import { useState } from 'react'
 
+import { UserFormDataSchema } from '@/app/schemas/userSchema';
+import { z } from 'zod'
 
-import { useForm, FormProvider, useFormContext } from "react-hook-form"
+// https://react-hook-form.com/docs/useform#resolver
+import { zodResolver } from '@hookform/resolvers/zod'
+
+import { useForm, FormProvider, useFormContext, SubmitHandler } from "react-hook-form"
 
 import BasicSignUpInfo from './basicSignUp';
 import AddressForm from './addressForm'
@@ -44,6 +49,7 @@ type BasicInformation = {
 };
 
 // Part 2 - Sports
+// Need to include sport played silly
 type SportInformation = {
   organization_name: string;
   position_one: string;
@@ -66,6 +72,8 @@ export interface UserPlayerInformation  {
   player_sport_info: SportInformation;
 }
 
+type Inputs = z.infer<typeof UserFormDataSchema>
+
 
 export default function PlayerSignUpForm() {
   const [previousStep, setPreviousStep] = useState(0)
@@ -74,19 +82,19 @@ export default function PlayerSignUpForm() {
   const methods = useForm()
 
   
-  const onSubmit = (data) => {
+  // const onSubmit = (data) => {
 
-  // On the bright side, I managed to get the data and set everything up today, now it will just be adding it to the state object.
-  console.log("LOOK FOR THIS DATA:", data)
-  //   setUserPlayerInfo(
-  //     {...userPlayerInfo,
-  //     player_basic_info: {
-  //             ...userPlayerInfo.player_basic_info,
-  //             ...updates,
-  //     },
-  // })
+  // // On the bright side, I managed to get the data and set everything up today, now it will just be adding it to the state object.
+  // console.log("LOOK FOR THIS DATA:", data)
+  // //   setUserPlayerInfo(
+  // //     {...userPlayerInfo,
+  // //     player_basic_info: {
+  // //             ...userPlayerInfo.player_basic_info,
+  // //             ...updates,
+  // //     },
+  // // })
   
-  }
+  // }
 
   // https://stackoverflow.com/questions/71324797/react-typescript-what-does-dispatchsetstateactionboolean-stand-for
   // Pretty good, talks about hovering over the state to see the <Dispatch> stuff 
@@ -144,7 +152,7 @@ export default function PlayerSignUpForm() {
     {
       id: 'Step 1',
       name: 'Personal Information',
-      fields: ['firstName', 'lastName', 'email']
+      fields: ['player_first_name', 'player_last_name', 'player_phone']
     },
     {
       id: 'Step 2',
@@ -196,6 +204,8 @@ export default function PlayerSignUpForm() {
 
     console.log( " Player signing up : ", userPlayerInfo)
 
+    //https://www.typescriptlang.org/docs/handbook/2/typeof-types.html#handbook-content
+
 
 
     // Everything should rest a the top level, 
@@ -219,7 +229,27 @@ export default function PlayerSignUpForm() {
       // sort by area and such?
       // Position -- Extra details?
     
-    // Current school standing / etc 
+    // Current school standing / etc
+    
+    const {
+      register,
+      handleSubmit,
+      watch,
+      reset,
+      trigger,
+      formState: { errors }
+    } = useForm<Inputs>({
+      resolver: zodResolver(UserFormDataSchema)
+    })
+    console.log("The Errors:",errors);
+
+    const processForm: SubmitHandler<Inputs> = (data, event) => {
+      console.log("Form Errors:", errors)
+      console.log("Form Data:", data)
+      reset()
+    }
+  
+    type FieldName = keyof Inputs
 
     const next = async () => {
       const fields = steps[currentStep].fields
@@ -253,7 +283,11 @@ export default function PlayerSignUpForm() {
     // }
 
 
+    // Steps included, tomorrow will connect route and button!
 
+    // Gray working on having the designs come in before I continue heavily css.
+
+    // Currently working on the excaldraw also to properly set everything up, 
 
 
     return (
@@ -261,35 +295,33 @@ export default function PlayerSignUpForm() {
       <div> 
        {/* Sections provide pre-selection, this page will allow flow of sign up */}
        <section className='relative z-10 flex flex-col justify-center p-8 bg-white shadow-md'>
-  {/* Steps */}
-  <nav aria-label='Progress'>
-    <ol className='flex justify-center space-x-4 md:space-x-6'>
-      {steps.map((step, index) => (
-        <li key={step.name} className='flex-1'>
-          <div className={`group flex w-full flex-col items-center transition-colors duration-200 ease-in-out ${
-            currentStep > index ? 'border-b-4 border-sky-600' : currentStep === index ? 'border-b-4 border-sky-600' : 'border-b-4 border-gray-200'
-          }`}>
-            <span className={`text-sm font-medium ${
-              currentStep >= index ? 'text-sky-600' : 'text-gray-500'
-            } transition-colors duration-200 ease-in-out`}>
-              {step.id}
-            </span>
-            <span className='text-sm font-medium'>
-              {step.name}
-            </span>
-          </div>
-        </li>
-      ))}
-    </ol>
-  </nav>
-</section>
+
+        {/* Steps */}
+        <nav aria-label='Progress'>
+          <ol className='flex justify-center space-x-4 md:space-x-6'>
+            {steps.map((step, index) => (
+              <li key={step.name} className='flex-1'>
+                <div className={`group flex w-full flex-col items-center transition-colors duration-200 ease-in-out ${
+                  currentStep > index ? 'border-b-4 border-sky-600' : currentStep === index ? 'border-b-4 border-sky-600' : 'border-b-4 border-gray-200'
+                }`}>
+                  <span className={`text-sm font-medium ${
+                    currentStep >= index ? 'text-sky-600' : 'text-gray-500'
+                  } transition-colors duration-200 ease-in-out`}>
+                    {step.id}
+                  </span>
+                  <span className='text-sm font-medium'>
+                    {step.name}
+                  </span>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </nav>
+      </section>
 
 
       {/* pass all methods into the context */}
-      <form onSubmit={methods.handleSubmit(onSubmit)}>
-
-
-
+      <form onSubmit={methods.handleSubmit(processForm)}>
       {currentStep === 0 && (
           // <motion.div
           //   initial={{ x: delta >= 0 ? '50%' : '-50%', opacity: 0 }}
@@ -302,6 +334,7 @@ export default function PlayerSignUpForm() {
         <BasicSignUpInfo 
         userPlayerInfo={userPlayerInfo}
         setUserPlayerInfo={setUserPlayerInfo} 
+        basicErrors={errors}
       />
           </div>
         )}
@@ -323,7 +356,7 @@ export default function PlayerSignUpForm() {
             </span>
         </label>
 
-        <input type="submit" value="Join SportPal" className="inline-block w-full cursor-pointer items-center bg-black px-6 py-3 text-center font-semibold text-white" />
+        <button type="submit" className="inline-block w-full cursor-pointer items-center bg-black px-6 py-3 text-center font-semibold text-white">Join SportPal</button>
 
 
          {/* Navigation */}

@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import NavBar from "./components/navigation";
+import NavBar from "./components/navigation/Navbar";
 import "./globals.css";
 
+
+//Layout having navbar is something i did a little while back and will need to re-read why and how. Genius though
+// https://nextjs.org/docs/pages/building-your-application/routing/pages-and-layouts#index-routes 
 
 const inter = Inter({ subsets: ["latin"] });
 

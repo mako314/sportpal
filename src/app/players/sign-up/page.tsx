@@ -1,4 +1,4 @@
-import PlayerSignUpForm from "./playerSignUpForm"
+import PlayerSignUpForm from "@/app/components/players/signUp/playerSignUpForm"
 
 export default function PlayerSignUpPage() {
 
