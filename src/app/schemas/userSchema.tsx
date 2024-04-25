@@ -4,6 +4,8 @@ import { z } from 'zod'
 // Should look into the date time https://zod.dev/?id=datetimes for this DOB stuff. Not sure if it'll be necessary though.
 // https://github.com/colinhacks/zod/discussions/938
 
+// This is done by the way, I just refused to have to fill everything out every time just to navigate to the next page.
+
 // https://stackoverflow.com/questions/76672351/error-messages-from-react-hook-form-with-zod
 
 export const UserFormDataSchema = z.object({

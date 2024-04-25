@@ -283,16 +283,6 @@ export default function PlayerSignUpForm() {
       }
     }
 
-    
-    // const goToPreviousPage = () => {
-    //   setSelectedIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : projectDisplayComponents.length - 1));
-    // }
-    
-    //   const goToNextPage = () => {
-    //     setSelectedIndex((prevIndex) => (prevIndex + 1) % projectDisplayComponents.length);
-    // }
-
-
     // Steps included, tomorrow will connect route and button!
 
     // Gray working on having the designs come in before I continue heavily css.
