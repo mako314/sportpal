@@ -254,6 +254,11 @@ export default function PlayerSignUpForm() {
 
 
     const processForm: SubmitHandler<Inputs> = (data, event) => {
+
+      // Need to work on a post, first thing I should continue to do is do a few inserts into the PostgreSQL table on Amazon RDS. I spent a decent bit of the day and almost got to the point of resetting my darn db until I changed security settings.
+
+      // Then we test 5 AT MAX posts, and check pricing.
+
       console.log("Form Errors:", errors)
       console.log("Form Data:", data)
       reset()
